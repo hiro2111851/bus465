@@ -37,6 +37,9 @@ include "login.php";
 <!-- Account Creation Form -->
 <div id="acc_create_form">
 
+<h2>HELLO</h2>
+
+
 <h3>Create Account</h3>
 
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
