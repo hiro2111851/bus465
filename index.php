@@ -26,7 +26,6 @@ include "login.php";
 <head>
     <link rel="stylesheet" href="css/bootstrap.css">
     <title>Home Page</title>
-    <script src="js/pop.js"></script>
 </head>
 
 <body>
@@ -34,10 +33,6 @@ include "login.php";
 <!-- Container for body content -->
 <div class="container">
 
-<div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-secondary">Create an Account</button>
-  <button type="button" class="btn btn-secondary">Login</button>
-</div>
 
 <!-- Account Creation Form -->
 <div id="acc_create_form">
