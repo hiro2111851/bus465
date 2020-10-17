@@ -36,12 +36,44 @@ include "db_connect.php";
                 <div class='card h-100'>
                     <img class='card-img-top' src='img/placeholder.png'>
                     <div class='card-body'>
-                        <h5 class'card-title'>".$row['name']."</h5>
+                        <h5 class'card-title mb-2'>".$row['name']."</h5>
+                        <h6 class='card-subtitle mb-2 text-muted'>$".$row['price']."</h6>
                         <p class='card-text'>".$row['description']."</p>
                     </div>
-                    <div class='card-footer'>
-                    $".$row['price'].
-                    "</div>
+                    <div class='card-footer'>";
+
+        // Generate dropdown menu for available batch
+        $query = "
+            SELECT b.id, DATE_FORMAT(b.delivery_date, '%W, %M %D') as batch_name, bi.max_quantity, bi.quantity_sold 
+            FROM batch_items bi 
+            JOIN batches b 
+            ON b.id = bi.batch_id
+            WHERE product_id = ".$row['id'].";";
+        
+        $out = mysqli_query($conn, $query);
+
+        if (mysqli_num_rows($out)==0) {
+            echo "
+                <label for='batch'>Select Batch: </label>
+                <select name='batch' disabled>
+                <option> Product Not Available </option>
+                </select>
+            ";
+        } else {
+            echo "
+                <label for='batch'>Select Batch: </label>
+                <select name='batch'>
+            ";
+
+            while ($batch = mysqli_fetch_array($out, MYSQLI_ASSOC)) {
+                echo "<option value='".$batch['id']."'>".$batch['batch_name']."</option>";
+            };
+
+            echo "</select>";
+        };
+
+        echo "
+                    </div>
                 </div>
             </div>";
     };
