@@ -10,6 +10,9 @@ session_start();
 
 //handles database connection
 include "db_connect.php";
+
+//handles batch creation
+include "add_batch.php";
 ?>
 
 <!DOCTYPE html>
@@ -26,11 +29,11 @@ include "db_connect.php";
 <!-- Website Container -->
 <div class="container">
 
-<h3>Add a New Order</h3>
+<h3>Add a New Batch</h3>
 
 <!-- Form to add a new batch-->
 <div class="batch_form">
-<form>
+<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
 
 <div class="form-group">
     <label for="start_date">Start Date</label>
@@ -43,14 +46,11 @@ include "db_connect.php";
 </div>
 
 <div class="form-group">
-    <label for="delivery_date">End Date</label>
+    <label for="delivery_date">Delivery Date</label>
     <input type="date" name="delivery_date" class="form-control" required>
 </div>
 
-<!-- Hidden Inputs-->
-<input type="hidden" name="status" value="New">
-
-<button type="submit" name="submit_batch" class="btn btn-primary">Submit</button>
+<button type="submit" name="submit_batch" class="btn btn-primary">Add Batch</button>
 
 </form>
 </div>
@@ -73,7 +73,7 @@ include "db_connect.php";
 <!-- Loop through sql query to generate table content (batches) -->
 <?php
 $sql = "
-    SELECT id, start_date, end_date, delivery_date, status
+    SELECT id, start_date, end_date, delivery_date
     FROM batches
     ORDER BY delivery_date DESC;
     ";
@@ -87,8 +87,17 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
             <td>".$row['start_date']."</td>
             <td>".$row['end_date']."</td>
             <td>".$row['delivery_date']."</td>
-            <td>".$row['status']."</td>
-        </tr>";
+            <td>";
+
+    if ($row['end_date'] < date("Y-m-d")) {
+        echo "Closed";
+    } else if ($row['end_date'] > date("Y-m-d")) {
+        echo "Not Yet Started";
+    } else {
+        echo "Open";
+    };
+    
+    echo "</td> </tr>";
 };
 ?>
     </tbody>

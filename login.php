@@ -1,3 +1,10 @@
+<!-- 
+    Page Name: Account Login
+
+    Page Description: PHP file handling Account login
+
+    Created By: Hiro
+-->
 <?php
 if(isset($_POST['submit_login'])) {
     // get user form input

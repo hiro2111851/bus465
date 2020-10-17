@@ -1,3 +1,11 @@
+<!-- 
+    Page Name: Create Account
+
+    Page Description: PHP file handling Account Creation
+
+    Created By: Hiro
+-->
+
 <?php
 if(isset($_POST['submit_create'])) {
     // get user form input
