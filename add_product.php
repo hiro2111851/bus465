@@ -30,9 +30,9 @@ if(isset($_POST['submit_product'])){
     
     if ($conn->query($sql) === TRUE) {
         $last_id = $conn->insert_id;
-        echo "New record created successfully. Last inserted ID is: ".$last_id;
+        echo "<div class='alert alert-success' role='alert'> New product: ".$name." added successfully. Product ID is: ".$last_id."</div>";
     } else {
-       die("Error: ".$sql."<br>". $conn->error);
+       die("<div class='alert alert-danger' role='alert'> Error: ".$sql."<br>". $conn->error."</div>");
     };
 
     //handle file extention check
@@ -55,17 +55,17 @@ if(isset($_POST['submit_product'])){
                 ";
 
                 if ($conn->query($query) === TRUE) {
-                    echo "Product image successfully uploaded";
+                    echo "<div class='alert alert-success' role='alert'>Product image successfully uploaded.</div>";
                 } else {
-                   die("Error: ".$sql."<br>". $conn->error);
+                   die("<div class='alert alert-danger' role='alert'> Error: ".$sql."<br>". $conn->error."</div>");
                 }
             } else {
-                echo "Product image must be smaller than 5 MB";
+                echo "<div class='alert alert-danger' role='alert'> Product image must be smaller than 5 MB</div>";
             }
         } else {
-            echo "File Upload Error";
+            echo "<div class='alert alert-danger' role='alert'> File Upload Error</div>";
         }
     } else {
-        echo "Product image must be of  jpg, jpeg, or png filetype";
+        echo "<div class='alert alert-danger' role='alert'> Product image must be of  jpg, jpeg, or png filetype</div>";
     }
 };

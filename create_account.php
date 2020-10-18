@@ -29,7 +29,7 @@ if(isset($_POST['submit_create'])) {
         .$phone."');";
 
     if (!$conn->query($sql)) {
-        echo "MySQL Error:". $conn -> error."<br>";
+        echo "<div class='alert alert-danger' role='alert'> MySQL Error:". $conn -> error."</div>";
     } else {
         echo "<div class='alert alert-success' role='alert'>Account created successfully.</div>";
     };
