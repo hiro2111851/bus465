@@ -27,14 +27,14 @@ include "db_connect.php";
 <!-- Product cards -->
 <div class="row row-cols-1 row-cols-md-3">
 <?php
-    $sql = "SELECT id, name, price, description FROM products;";
+    $sql = "SELECT id, name, price, description, img_link FROM products;";
     $result = mysqli_query($conn, $sql);
 
     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
         echo "
             <div class='col mb-4'>
                 <div class='card h-100'>
-                    <img class='card-img-top' src='img/placeholder.png'>
+                    <img class='card-img-top' src='".$row['img_link']."'>
                     <div class='card-body'>
                         <h5 class'card-title mb-2'>".$row['name']."</h5>
                         <h6 class='card-subtitle mb-2 text-muted'>$".$row['price']."</h6>
