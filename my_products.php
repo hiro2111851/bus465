@@ -48,7 +48,7 @@ include "add_product.php";
                 echo "
                     <tr>
                         <td>".$row['id']."</td>
-                        <td class='w-25'><img class='w-25' src='".$row['img_link']."'></td>
+                        <td class='w-25'><img class='w-50' src='".$row['img_link']."'></td>
                         <td>".$row['name']."</td>
                         <td>".$row['price']."</td>
                         <td>".$row['short_desc']."</td>
