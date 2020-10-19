@@ -43,7 +43,7 @@ include "db_connect.php";
 <!-- Loop through sql query to generate table content (payments) -->
     <?php
     $sql = "
-        SELECT CONCAT(c.first_name,' ',c.last_name) AS 'Name', o.id, o.date, SUM(oi.quantity*oi.price) as 'Order Total', o.status
+        SELECT CONCAT(c.first_name,' ',c.last_name) AS 'name', o.id, o.date, SUM(oi.quantity*oi.price) as 'amount', o.status
         FROM orders o
         INNER JOIN order_items oi
         ON o.id = oi.order_id
