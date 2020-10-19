@@ -48,7 +48,8 @@ include "db_connect.php";
             FROM batch_items bi 
             JOIN batches b 
             ON b.id = bi.batch_id
-            WHERE product_id = ".$row['id'].";";
+            WHERE product_id = ".$row['id']."
+            AND bi.max_quantity-bi.quantity_sold > 0;";
         
         $out = mysqli_query($conn, $query);
 
