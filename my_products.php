@@ -21,6 +21,7 @@ include "add_product.php";
 
 <head>
     <link rel="stylesheet" href="css/bootstrap.css">
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
     <title>My Products</title>
 </head>
 
@@ -62,26 +63,27 @@ include "add_product.php";
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST" enctype="multipart/form-data">
 <h4>Add a Product</h4>
 
-<div class="form-group">
-    <label for="name">Product Name</label>
-    <input type="text" name="name" class="form-control" required>
+<div class="form-row">
+    <div class="form-group col-7">
+        <label for="name">Product Name</label>
+        <input type="text" name="name" class="form-control" required>
+    </div>
+
+    <div class="form-group col">
+        <label for="price">Price</label>
+        <input type="number" min="1" step="any" name="price" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="image">Product Image</label><br>
+        <input type="file" name="image" id="image">
+    </div>
 </div>
 
-<div class="form-group">
-    <label for="price">Price</label>
-    <input type="number" min="1" step="any" name="price" class="form-control" required>
-</div>
-
-<div class="form-group">
-    <label for="description">Product Description</label>
-    <input type="textarea" name="description" rows="5" class="form-control" required>
-</div>
-
-<p>Product Image</p>
-<div class="custom-file mb-3">
-    <input type="file" name="image" class="custom-file-input">
-    <label class="custom-file-label" for="image">Choose image file</label>
-</div>
+    <div class="form-group">
+        <label for="description">Product Description</label>
+        <textarea name="description" rows="5" class="form-control" required></textarea>
+    </div>
 
 <button type="submit" name="submit_product" class="btn btn-primary">Add Batch</button>
 
@@ -90,7 +92,7 @@ include "add_product.php";
 
 </div>
 </body>
-
+        
 </html>
 
 <?php 
