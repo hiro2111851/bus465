@@ -18,8 +18,6 @@ if(isset($_POST['submit_batch_item'])) {
         .$batch_id.", "
         .$product_id.", "
         .$max_quantity.", 0);";
-
-    echo $sql;
     
     if (!$conn->query($sql)) {
         echo "MySQL Error:". $conn -> error."<br>";

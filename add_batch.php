@@ -13,12 +13,11 @@ if(isset($_POST['submit_batch'])) {
     $delivery_date = $_POST['delivery_date'];
 
     $sql = "
-    INSERT INTO batches (start_date, end_date, delivery_date, status)
+    INSERT INTO batches (start_date, end_date, delivery_date)
     VALUES ('"
         .$start_date."', '"
         .$end_date."', '"
-        .$delivery_date."', '
-        New');";
+        .$delivery_date."');";
     
     if (!$conn->query($sql)) {
         echo "MySQL Error:". $conn -> error."<br>";

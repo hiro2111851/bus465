@@ -91,7 +91,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 
     if ($row['end_date'] < date("Y-m-d")) {
         echo "Closed";
-    } else if ($row['end_date'] > date("Y-m-d")) {
+    } else if ($row['start_date'] > date("Y-m-d")) {
         echo "Not Yet Started";
     } else {
         echo "Open";
