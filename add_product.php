@@ -39,7 +39,7 @@ if(isset($_POST['submit_product'])){
     $fileExt = explode('.', $fileName);
     $fileLowerExt = strtolower(end($fileExt));
     $allow = array('jpg', 'jpeg', 'png');
-    $fileNameNew = $last_id."_".strtolower(trim($name)).$fileLowerExt;
+    $fileNameNew = $last_id."_".strtolower(trim($name)).".".$fileLowerExt;
     $fileDestination = "img/productimage/".$fileNameNew;
 
     //check if uploaded file has allowed extension
