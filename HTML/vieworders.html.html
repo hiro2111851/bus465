@@ -1,0 +1,132 @@
+<!-- 
+    Page Name: View Orders
+
+    Page Description: For Customer to view their current orders
+
+    Created By:
+-->
+
+<!DOCTYPE html>
+
+<html lang=en>
+
+<head>
+    <title>Butterbean Cookies View My Orders</title>
+<style>
+.search{
+  float: right;
+}
+
+.menu-icon{
+  width: 35px;
+  height: 5px;
+  background-color: black;
+  margin: 6px 0;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+}
+.navigation {
+  float: left;
+  display: block;
+  padding: 8px;
+  text-align: center;
+}
+
+.header{
+  width: 100%;
+  display: inline-block;
+  padding: 5px;
+  text-align: center;
+}
+
+h2{
+  font-family: "Britannic", sans-serif;
+}
+
+.order{
+  border: groove;
+  padding: 0px;
+}
+</style>    
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head><!-- for shopping cart icon--> 
+<div class="toppage" div style="display:flex; flex-direction: row; justify-content: left; align-items: center">
+<div class="header">
+<h1>Butterbean Cookies</h1>
+</div>
+<div class="header"> 
+<form action=""> <!-- idk where the search button goes after you hit submit--> 
+<div class="header">
+<input type="text" placeholder="Search.." name="search">
+</div>
+<div class="header"> 
+<button type="submit"><i class="fa fa-search"></i></button>
+</div>
+</form>
+</div>
+
+<i class="fa fa-shopping-cart" style="font-size:36px"></i>
+
+<div class="menu-icon"></div>
+<div class="menu-icon"></div>
+<div class="menu-icon"></div>
+</div>
+<body>
+
+<ul>
+  <li class="navigation"><a href="#aboutus">About Us</a></li>
+  <li class="navigation"><a href="#thecookies">The Cookies</a></li>
+  <li class="navigation"><a href="#login">Log In</a></li>
+</ul>
+
+<h2>
+My Orders
+</h2><hr>
+<div class="order">
+<p>
+Order #: <!--INSERT GENERATED ORDER NUMBER-->
+</p><br>
+<div class="productsummary">
+<img src="" alt="cookie pic">
+<p>Red Velvet Chip Cookies</p>
+<label>Qty:</label>
+<p>Price: $15</p>
+</div>
+
+<div class="ordersummary">
+<h3>Order Summary</h3>
+<body>
+<label>Subtotal</label><br><br>
+<label>Est. Shipping</label><br><br>
+<label>Est. Taxes</label><br><br>
+<label>Total</label><br><br>
+
+<h3>Shipping Address</h3>
+<p>
+Street Address: <br><br>
+City: <br><br>
+Postal Code: <br><br>
+</p>
+<div class="buttons">
+<a href=""><!-- ADD TRACK PACKAGE LINK--> 
+  <button style="margin: 15px">
+  Track Order
+  </button>
+</a> 
+
+</div>
+</body>
+</div>
+
+</div>
+
+</body>
+
+</html>

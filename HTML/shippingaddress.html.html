@@ -1,0 +1,124 @@
+<!-- <!-- 
+    Page Name: Shipping Address
+
+    Page Description: For the customer to input their shipping address
+
+    Created By:
+-->
+
+<!DOCTYPE html>
+
+<html lang=en>
+
+<head>
+    <title>Butterbean Cookies Shipping Address</title>
+    
+<style>
+.menu-icon{
+  width: 35px;
+  height: 5px;
+  background-color: black;
+  margin: 6px 0;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  padding: 8px;
+  text-align: center;
+}
+
+.border {
+  border-style: groove;
+  margin: auto;
+}
+
+h3 {
+  font-family: sans-serif;
+  font-size: 20pt;
+}
+
+#fname, #lname, #address, #apt, #city, #zipcode, #phone
+{
+    height: 20px;
+    font-size: 14pt;
+}
+
+.buttons{
+  height: 40px;
+  font-family: sans-serif;
+  font-size: 20pt;
+}
+
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head><!-- for shopping cart icon--> 
+<div class="toppage">
+<div class="header">
+<h1>Butterbean Cookies</h1>
+</div>
+<div class="header"> 
+<form action=""> <!-- idk where the search button goes after you hit submit--> 
+<div class="header">
+<input type="text" placeholder="Search.." name="search">
+</div>
+<div class="header">
+<button type="submit"><i class="fa fa-search"></i></button>
+</div>
+</form>
+</div>
+
+<i class="fa fa-shopping-cart" style="font-size:36px"></i>
+
+<div class="menu-icon"></div>
+<div class="menu-icon"></div>
+<div class="menu-icon"></div>
+</div>
+<body>
+
+<ul>
+  <li><a href="#aboutus">About Us</a></li>
+  <li><a href="#thecookies">The Cookies</a></li>
+  <li><a href="#login">Log In</a></li>
+</ul>
+
+<div class="border" align="center">
+<h3 align="left" margin="10px">
+Shipping information
+</h3>
+<form action=""><!--ADD PROCEED TO PAYMENT PHP LINK -->
+<div class="shippinginfo" align="left">
+<input type="text" id="fname" size="35px" name="fname" placeholder="First Name">
+<input type="text" id="lname" size="35px" name="lname" placeholder="Last Name"><br>
+<input type="text" id="address" size="35px" name="Address" placeholder="Street Address">
+<input type="text" id="apt" size="35px" name="apt" placeholder="Apt/Suite (Optional)"><br>
+<input type="text" id="city" size="35px" name="city" placeholder="City">
+<input type="text" id="zipcode" size="35px" name="zipcode" placeholder="Zip Code">
+<input type="text" id="phone" size="70px" name="phone" placeholder="Phone Number">
+</div>
+<br><br><br>
+<div class="buttons" style="margin: 5px">
+<a href=""><!-- ADD LINK TO BACK TO BROWSE--> 
+  <button>
+  Back to Browsing
+  </button>
+</a>
+
+<input type="submit" value="Proceed to Payment">
+</div>
+
+</form>
+</div>
+
+</body>
+
+</html>
