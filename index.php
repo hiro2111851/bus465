@@ -17,6 +17,7 @@ include "create_account.php";
 
 // check login form submission
 include "login.php";
+
 ?>
 
 <!DOCTYPE html>
