@@ -10,6 +10,9 @@ session_start();
 
 //handles database connection
 include "db_connect.php";
+
+//handles add-to-cart
+include "add_to_cart.php";
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +47,7 @@ include "db_connect.php";
 
         // Generate dropdown menu for available batch
         $query = "
-            SELECT b.id, DATE_FORMAT(b.delivery_date, '%W, %M %D') as batch_name, bi.max_quantity, bi.quantity_sold 
+            SELECT bi.id, DATE_FORMAT(b.delivery_date, '%W, %M %D') as batch_name, bi.max_quantity, bi.quantity_sold
             FROM batch_items bi 
             JOIN batches b 
             ON b.id = bi.batch_id
@@ -52,6 +55,9 @@ include "db_connect.php";
             AND bi.max_quantity-bi.quantity_sold > 0;";
         
         $out = mysqli_query($conn, $query);
+
+
+        echo "<form action='".htmlspecialchars($_SERVER['PHP_SELF'])."' method='POST'>";
 
         if (mysqli_num_rows($out)==0) {
             echo "
@@ -67,18 +73,38 @@ include "db_connect.php";
             ";
 
             while ($batch = mysqli_fetch_array($out, MYSQLI_ASSOC)) {
-                echo "<option value='".$batch['id']."'>".$batch['batch_name']."</option>";
+                echo "<option value='".$batch['id']."/".$batch['batch_name']."'>".$batch['batch_name']."</option>";
             };
 
-            echo "</select>";
-        };
+            echo $batch['batch_name'];
 
+            // max is 10 for now
+            echo "</select>
+            <div class='form-inline'>
+
+                    <label for='email'>Quantity:</label>
+                    <input type='number' min='1' max='10' name='quantity' class='form-control ml-3' required>
+
+                    <input type='hidden' name='product_name' value='".$row['name']."'>
+                    <input type='hidden' name='price' value='".$row['price']."'>
+
+                    <button type='submit' name='add_to_cart' class='btn btn-primary ml-3'>Add to Cart</button>
+            </div>
+
+            </form>";
+        };
+        
         echo "
                     </div>
                 </div>
             </div>";
     };
 ?>
+</div>
+
+<!-- Shopping Cart -->
+<div class="shopping_cart">
+
 </div>
 
 </div>
