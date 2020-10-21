@@ -9,10 +9,10 @@
 session_start();
 
 //handles database connection
-include "db_connect.php";
+include "../external/db_connect.php";
 
 //handles batch creation
-include "add_batch.php";
+include "../external/add_batch.php";
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +20,7 @@ include "add_batch.php";
 <html lang=en>
 
 <head>
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
     <title>My Batches</title>
 </head>
 

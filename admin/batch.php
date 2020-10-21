@@ -13,10 +13,10 @@ session_start();
 $batch_id = $_GET['batch_id'];
 
 //handles database connection
-include "db_connect.php";
+include "../external/db_connect.php";
 
 // handles adding batch item to batch
-include "add_batch_item.php";
+include "../external/add_batch_item.php";
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +24,7 @@ include "add_batch_item.php";
 <html lang=en>
 
 <head>
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
     <title>Batch Detail: <?php echo $batch_id; ?></title>
 </head>
 

@@ -46,7 +46,7 @@ if(isset($_POST['submit_product'])){
     if(in_array($fileLowerExt, $allow)) {
         if($fileError === 0){
             if($fileSize < 5000000){
-                move_uploaded_file($fileTmpName, $fileDestination);
+                move_uploaded_file($fileTmpName, "../".$fileDestination);
 
                 $query = "
                     UPDATE products

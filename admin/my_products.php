@@ -9,10 +9,10 @@
 session_start();
 
 //handles database connection
-include "db_connect.php";
+include "../external/db_connect.php";
 
 //handles adding product and product image upload
-include "add_product.php";
+include "../external/add_product.php";
 ?>
 
 <!DOCTYPE html>
@@ -20,8 +20,8 @@ include "add_product.php";
 <html lang=en>
 
 <head>
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <script type="text/javascript" src="../js/jquery-3.5.1.min.js"></script>
     <title>My Products</title>
 </head>
 
@@ -49,7 +49,7 @@ include "add_product.php";
                 echo "
                     <tr>
                         <td>".$row['id']."</td>
-                        <td class='w-25'><img class='w-50' src='".$row['img_link']."'></td>
+                        <td class='w-25'><img class='w-50' src='../".$row['img_link']."'></td>
                         <td>".$row['name']."</td>
                         <td>".$row['price']."</td>
                         <td>".$row['short_desc']."</td>

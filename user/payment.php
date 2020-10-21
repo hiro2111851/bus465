@@ -10,7 +10,7 @@
 session_start();
 
 //handles database connection
-include "db_connect.php";
+include "../external/db_connect.php";
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +18,7 @@ include "db_connect.php";
 <html lang=en>
 
 <head>
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
     <title>Payment Confirmations</title>
 </head>
 

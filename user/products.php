@@ -9,10 +9,10 @@
 session_start();
 
 //handles database connection
-include "db_connect.php";
+include "../external/db_connect.php";
 
 //handles add-to-cart
-include "add_to_cart.php";
+include "../external/add_to_cart.php";
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +20,7 @@ include "add_to_cart.php";
 <html lang=en>
 
 <head>
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
     <title>Products</title>
 </head>
 
@@ -37,7 +37,7 @@ include "add_to_cart.php";
         echo "
             <div class='col mb-4'>
                 <div class='card h-100'>
-                    <img class='card-img-top' src='".$row['img_link']."'>
+                    <img class='card-img-top' src='../".$row['img_link']."'>
                     <div class='card-body'>
                         <h5 class'card-title mb-2'>".$row['name']."</h5>
                         <h6 class='card-subtitle mb-2 text-muted'>$".$row['price']."</h6>

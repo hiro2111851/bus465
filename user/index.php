@@ -10,13 +10,13 @@
 
 <?php
 // handles database connection
-include "db_connect.php";
+include "../external/db_connect.php";
 
 // check account creation form submission
-include "create_account.php";
+include "../external/create_account.php";
 
 // check login form submission
-include "login.php";
+include "../external/login.php";
 
 ?>
 
@@ -25,7 +25,7 @@ include "login.php";
 <html lang=en>
 
 <head>
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
     <title>Home Page</title>
 </head>
 
