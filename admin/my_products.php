@@ -13,6 +13,9 @@ include "../external/db_connect.php";
 
 //handles adding product and product image upload
 include "../external/add_product.php";
+
+//handles removing products
+include "../external/remove_product.php";
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +39,7 @@ include "../external/add_product.php";
             <th scope="col">Product Image</th>
             <th scope="col">Product Name</th>
             <th scope="col">Price</th>
-            <th scope="col">Description</th>
+            <th colspan="2" scope="col">Description</th>
         </tr>
     </thead>
     <tbody>
@@ -53,6 +56,14 @@ include "../external/add_product.php";
                         <td>".$row['name']."</td>
                         <td>".$row['price']."</td>
                         <td>".$row['short_desc']."</td>
+                        <td>
+                            <form action='".htmlspecialchars($_SERVER['PHP_SELF'])."' method='POST'>
+                                <input type='hidden' name='product_id' value='".$row['id']."'>
+                                <input type='hidden' name='name' value='".$row['name']."'>
+                                <input type='hidden' name='img_link' value='".$row['img_link']."'>
+                                <button type='submit' name='remove_product' class='btn btn-danger'>Remove</button>
+                            </form>
+                        </td>
                     </tr>";
             };
         ?>
