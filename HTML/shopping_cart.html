@@ -1,0 +1,204 @@
+<!-- 
+    Page Name: Shopping Cart HTML page
+
+    Page Description: HTML page for the shopping cart. This will eventually be integrated as a pop-up on the right hand side of the products page.
+
+    Wireframe: Fourth Wireframe on https://balsamiq.cloud/s4m5qc/pp2pcs5/r7C04, named View Shopping Cart
+
+    Created By: Hiro
+-->
+
+<!DOCTYPE html>
+
+<html lang=en>
+
+<head>
+
+    <!-- This will link the Bootstrap css file to this HTML page allowing us to use the Bootstrap classes to style our HTML components.  -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+
+    <style>
+        .scroll {
+            height: 20em;
+            overflow-y: scroll;
+        }
+    </style>
+
+    <title>Shopping Cart</title>
+</head>
+
+<body class="w-50 h-100 float-right">
+
+<!-- This div wraps the entire shopping cart. The class "container" that I gave gives margin on both right and left side -->
+<div id="wrapper" class="border border-dark mx-3 p-5">
+
+<!-- This div wraps the shopping cart section -->
+<div id="cart" class="pb-3 border-bottom border-dark">
+<!-- Heading for Shopping Cart -->
+<h2 class="text-center">
+
+    <!-- Bootstrap icon from https://icons.getbootstrap.com/icons/chevron-left/ -->
+    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-left float-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+    </svg>
+
+    Shopping Cart
+
+    <!-- Bootstrap icon from https://icons.getbootstrap.com/icons/cart-fill/ -->
+    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart-fill float-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+    </svg>
+</h2>
+
+<!-- DIV for the section where the items added to the cart is displayed -->
+<div id="products" class="px-5 scroll">
+
+    <!-- 1st product -->
+    <div id="product 1" class="row">
+        <div class="col-3">
+            <img src="../img/placeholder.png" class="img-thumbnail">
+        </div>
+        <div class="col-9">
+            <p>Red Velvet Chip Cookie</p>
+            <form>
+                <div class="row">
+                    <div class="col-4">
+                        <p>Qty:</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="number" name="quantity" class="form-control" value="1" required>
+                    </div>
+                </div>
+            </form>
+                <div class="row">
+                    <p class="col-sm-4">Price:</p>
+                    <p class="col-sm-8 text-right">$15.00</p>
+                </div>
+        </div>
+    </div>
+
+    <!-- 2nd product -->
+    <div id="product 2" class="row">
+        <div class="col-3">
+            <img src="../img/placeholder.png" class="img-thumbnail">
+        </div>
+        <div class="col-9">
+            <p>Chocolate Chip Cookie</p>
+            <form>
+                <div class="row">
+                    <div class="col-4">
+                        <p>Qty:</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="number" name="quantity" class="form-control" value="3" required>
+                    </div>
+                </div>
+            </form>
+                <div class="row">
+                    <p class="col-sm-4">Price:</p>
+                    <p class="col-sm-8 text-right">$12.00</p>
+                </div>
+        </div>
+    </div>
+
+    <!-- 1st product -->
+    <div id="product 1" class="row">
+        <div class="col-3">
+            <img src="../img/placeholder.png" class="img-thumbnail">
+        </div>
+        <div class="col-9">
+            <p>Red Velvet Chip Cookie</p>
+            <form>
+                <div class="row">
+                    <div class="col-4">
+                        <p>Qty:</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="number" name="quantity" class="form-control" value="1" required>
+                    </div>
+                </div>
+            </form>
+                <div class="row">
+                    <p class="col-sm-4">Price:</p>
+                    <p class="col-sm-8 text-right">$15.00</p>
+                </div>
+        </div>
+    </div>
+
+    <!-- 2nd product -->
+    <div id="product 2" class="row">
+        <div class="col-3">
+            <img src="../img/placeholder.png" class="img-thumbnail">
+        </div>
+        <div class="col-9">
+            <p>Chocolate Chip Cookie</p>
+            <form>
+                <div class="row">
+                    <div class="col-4">
+                        <p>Qty:</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="number" name="quantity" class="form-control" value="3" required>
+                    </div>
+                </div>
+            </form>
+                <div class="row">
+                    <p class="col-sm-4">Price:</p>
+                    <p class="col-sm-8 text-right">$12.00</p>
+                </div>
+        </div>
+    </div>
+
+<!-- div end tag for <div id="products"> -->
+</div>
+
+<!-- div end tag for <div id="cart"> -->
+</div>
+
+<!-- DIV for Order Summary section -->
+<div id="order-summary" class="py-3 border-bottom border-dark">
+    <h2 class="text-center"> Order Summary </h2>
+
+        <div class="row">
+            <p class="col-sm-4">Subtotal: </p>
+            <p class="col-sm-8 text-right"> $135.60</p>
+        </div>
+
+        <div class="row">
+            <p class="col-sm-4">Est. Shipping: </p>
+            <p class="col-sm-8 text-right"> $4.95</p>
+        </div>
+
+        <div class="row">
+            <p class="col-sm-4">Est. Taxes: </p>
+            <p class="col-sm-8 text-right"> $13.66</p>
+        </div>
+
+        <div class="row">
+            <p class="col-sm-4">Estimated Total: </p>
+            <p class="col-sm-8 text-right"> $154.21</p>
+        </div>
+
+<!-- div end tag for <div id='order-summary'> -->
+</div>
+
+<!-- This div holds the 2 buttons Continue Shopping and Checkout -->
+<div id="buttons py-3 border-bottom border-dark">
+    <!-- Div that holds two connected side-by-side buttons btn-group class connects the two buttons -->
+    <div class="row m-3">
+        <div class="col mx-2">
+            <button type="button" class="col btn btn-secondary btn-lg">Continue Shopping</button>
+        </div>
+        <div class="col mx-2">
+            <button type="button" class="col btn btn-secondary btn-lg">Checkout</button>
+        </div>
+    </div> 
+<!-- div end tag for <div id="buttons"> -->
+</div>
+
+<!-- div end tag for <div id="wrapper"> -->
+</div>
+
+</body>
+
+</html>
