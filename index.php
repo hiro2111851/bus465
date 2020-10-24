@@ -14,10 +14,19 @@ $tax_rate = 0.12;
 $shipping = 4.95;
 
 //handles database connection
-include "../external/db_connect.php";
+include "external/db_connect.php";
 
 //handles add-to-cart
-include "../external/add_to_cart.php";
+include "external/add_to_cart.php";
+
+// check account creation form submission
+include "external/create_account.php";
+
+// check login form submission
+include "external/login.php";
+
+// adds a navbar
+include "external/navbar.php";
 ?>
 
 <!DOCTYPE html>
@@ -25,16 +34,33 @@ include "../external/add_to_cart.php";
 <html lang=en>
 
 <head>
-    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <script>
         function openCart() {
             document.getElementById("myCart").style.width ="40%";
             document.getElementById("main").style.marginRight = "40%";
+            document.getElementById("login_form").style.display = "none";
+            document.getElementById("acc_create_form").style.display = "none";
         }
 
         function closeCart() {
             document.getElementById("myCart").style.width ="0";
             document.getElementById("main").style.marginRight = "0";  
+        }
+
+        function openLogin() {
+            document.getElementById("login_form").style.display = "block";
+            document.getElementById("acc_create_form").style.display = "none";
+        }
+
+        function openCreateAccount() {
+            document.getElementById("login_form").style.display = "none";
+            document.getElementById("acc_create_form").style.display = "block";
+        }
+
+        function closeForm() {
+            document.getElementById("login_form").style.display = "none";
+            document.getElementById("acc_create_form").style.display = "none";
         }
     </script>
     <title>Products</title>
@@ -66,40 +92,39 @@ include "../external/add_to_cart.php";
             <!-- DIV for the section where the items added to the cart is displayed -->
             <div id="products" class="px-5 scroll" style="height: 20em; overflow-y: scroll;">
                 <?php
-                $subtotal = 0;
-                foreach ($_SESSION['shopping_cart'] as $cart_item) {?>
-                    <div class="row p-2">
-                        <div class="col-3">
-                            <img src="<?php echo "../".$cart_item['img_link'];?>" class="img-thumbnail">
+                    $subtotal = 0;
+                    foreach ($_SESSION['shopping_cart'] as $cart_item) {?>
+                        <div class="row p-2">
+                            <div class="col-3">
+                                <img src="<?php echo $cart_item['img_link'];?>" class="img-thumbnail">
+                            </div>
+                            <div class="col-9">
+                                <h6><?php echo $cart_item['product_name'];?></h6>
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <p>Price:</label>
+                                        </div>
+                                        <div class="col-4">
+                                            <p><?php echo "$".$cart_item['price'];?></p>
+                                        </div>
+                                        <div class="col-2">
+                                            <p>Qty:</label>
+                                        </div>
+                                        <div class="col-4">
+                                            <p><?php echo $cart_item['quantity'];?></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <p class="col-sm-4">Batch:</p>
+                                        <p class="col-sm-8 text-right"><?php echo $cart_item['batch_date'];?></p>
+                                    </div>
+                            </div>                
                         </div>
-                        <div class="col-9">
-                            <h6><?php echo $cart_item['product_name'];?></h6>
-                                <div class="row">
-                                    <div class="col-2">
-                                        <p>Price:</label>
-                                    </div>
-                                    <div class="col-4">
-                                        <p><?php echo "$".$cart_item['price'];?></p>
-                                    </div>
-                                    <div class="col-2">
-                                        <p>Qty:</label>
-                                    </div>
-                                    <div class="col-4">
-                                        <p><?php echo $cart_item['quantity'];?></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <p class="col-sm-4">Batch:</p>
-                                    <p class="col-sm-8 text-right"><?php echo $cart_item['batch_date'];?></p>
-                                </div>
-                        </div>                
-                    </div>
-                
-                <?php
-                    $subtotal += $cart_item['price'];    
-                };
+                    
+                    <?php
+                        $subtotal += $cart_item['price'];    
+                    }
                 ?>
-                <!-- 1st product -->
 
             </div>
         </div>
@@ -146,10 +171,57 @@ include "../external/add_to_cart.php";
 
 <!-- Main Content -->
 <div id="main"> 
+<div class="container mt-3">
 
-<div class="container">
+<!-- Login Form -->
+<div id="login_form" style="display:none;">
+    <h3>Account Login</h3>
+    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" name="email" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" class="form-control" required>
+    </div>
+    <button type="submit" name="submit_login" class="btn btn-primary">Submit</button>
+    <button onclick="closeForm()" class="btn btn-danger">Back</button>
+    </form>
+</div>
 
-<button class="btn btn-primary" onclick="openCart()">Shopping Cart </button>
+<!-- Account Creation Form -->
+<div id="acc_create_form" style="display:none;">
+    <h3>Create Account</h3>
+    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" name="email" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="dob">Date of Birth</label>
+        <input type="date" name="dob" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input type="text" name="first_name" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="last_name">Last Name</label>
+        <input type="text" name="last_name" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="text" name="phone" class="form-control" required>
+    </div>
+    <button type="submit" name="submit_create" class="btn btn-primary">Submit</button>
+    <button onclick="closeForm()" class="btn btn-danger">Back</button>
+    </form>
+</div>
 
 <!-- Product cards -->
 <div class="row row-cols-1 row-cols-md-3">
@@ -161,7 +233,7 @@ include "../external/add_to_cart.php";
         echo "
             <div class='col mb-4'>
                 <div class='card h-100'>
-                    <img class='card-img-top' src='../".$row['img_link']."'>
+                    <img class='card-img-top' src='".$row['img_link']."'>
                     <div class='card-body'>
                         <h5 class'card-title mb-2'>".$row['name']."</h5>
                         <h6 class='card-subtitle mb-2 text-muted'>$".$row['price']."</h6>

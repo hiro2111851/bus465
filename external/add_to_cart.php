@@ -53,8 +53,9 @@ if(isset($_POST['add_to_cart'])){
     }
 };
 
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
+// display cart array
+// echo "<pre>";
+// print_r($_SESSION);
+// echo "</pre>";
 
 ?>
