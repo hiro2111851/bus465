@@ -71,7 +71,7 @@ include "external/navbar.php";
 <!-- Shopping Cart -->
 <div id="myCart" class="h-100 float-right sticky-top" style="width:0; overflow:hidden;">
 
-    <div id="wrapper" class="border border-dark mx-3 p-5">
+    <div id="wrapper" class="border border-dark p-5">
 
         <!-- This div wraps the shopping cart section -->
         <div id="cart" class="pb-3 border-bottom border-dark">
