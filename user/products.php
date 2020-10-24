@@ -7,6 +7,11 @@
 -->
 <?php
 session_start();
+// session_destroy();
+
+// Need to track and adjust tax rates elsewhere
+$tax_rate = 0.12;
+$shipping = 4.95;
 
 //handles database connection
 include "../external/db_connect.php";
@@ -21,11 +26,130 @@ include "../external/add_to_cart.php";
 
 <head>
     <link rel="stylesheet" href="../css/bootstrap.css">
+    <script>
+        function openCart() {
+            document.getElementById("myCart").style.width ="40%";
+            document.getElementById("main").style.marginRight = "40%";
+        }
+
+        function closeCart() {
+            document.getElementById("myCart").style.width ="0";
+            document.getElementById("main").style.marginRight = "0";  
+        }
+    </script>
     <title>Products</title>
 </head>
 
 <body>
+
+<!-- Shopping Cart -->
+<div id="myCart" class="h-100 float-right sticky-top" style="width:0; overflow:hidden;">
+
+    <div id="wrapper" class="border border-dark mx-3 p-5">
+
+        <!-- This div wraps the shopping cart section -->
+        <div id="cart" class="pb-3 border-bottom border-dark">
+
+            <!-- Heading for Shopping Cart -->
+            <h2 class="text-center mb-3">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-left float-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg" onclick="closeCart()">
+                    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                </svg>
+
+                Shopping Cart
+
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart-fill float-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                </svg>
+            </h2>
+
+            <!-- DIV for the section where the items added to the cart is displayed -->
+            <div id="products" class="px-5 scroll" style="height: 20em; overflow-y: scroll;">
+                <?php
+                $subtotal = 0;
+                foreach ($_SESSION['shopping_cart'] as $cart_item) {?>
+                    <div class="row p-2">
+                        <div class="col-3">
+                            <img src="<?php echo "../".$cart_item['img_link'];?>" class="img-thumbnail">
+                        </div>
+                        <div class="col-9">
+                            <h6><?php echo $cart_item['product_name'];?></h6>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <p>Price:</label>
+                                    </div>
+                                    <div class="col-4">
+                                        <p><?php echo "$".$cart_item['price'];?></p>
+                                    </div>
+                                    <div class="col-2">
+                                        <p>Qty:</label>
+                                    </div>
+                                    <div class="col-4">
+                                        <p><?php echo $cart_item['quantity'];?></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <p class="col-sm-4">Batch:</p>
+                                    <p class="col-sm-8 text-right"><?php echo $cart_item['batch_date'];?></p>
+                                </div>
+                        </div>                
+                    </div>
+                
+                <?php
+                    $subtotal += $cart_item['price'];    
+                };
+                ?>
+                <!-- 1st product -->
+
+            </div>
+        </div>
+
+        <!-- DIV for Order Summary section -->
+        <div id="order-summary" class="py-3 border-bottom border-dark">
+            <h2 class="text-center"> Order Summary </h2>
+
+                <div class="row">
+                    <p class="col-sm-4">Subtotal: </p>
+                    <p class="col-sm-8 text-right"> <?php echo "$".$subtotal;?></p>
+                </div>
+
+                <!-- Not Real Amount -->
+                <div class="row">
+                    <p class="col-sm-4">Est. Shipping: </p>
+                    <p class="col-sm-8 text-right"> <?php echo "$".$shipping;?></p>
+                </div>
+
+                <div class="row">
+                    <p class="col-sm-4">Est. Taxes: </p>
+                    <p class="col-sm-8 text-right"> <?php echo "$".round(($subtotal+$shipping)*$tax_rate, 2);?></p>
+                </div>
+
+                <div class="row">
+                    <p class="col-sm-4">Estimated Total: </p>
+                    <p class="col-sm-8 text-right"> <?php echo "$".round(($subtotal+$shipping)*(1+$tax_rate), 2);?></p>
+                </div>
+        </div>
+
+        <!-- This div holds the 2 buttons Continue Shopping and Checkout -->
+        <div id="buttons py-3 border-bottom border-dark">
+            <div class="row m-3">
+                <div class="col mx-2">
+                    <button type="button" class="col btn btn-secondary btn-lg">Continue Shopping</button>
+                </div>
+                <div class="col mx-2">
+                    <button type="button" class="col btn btn-secondary btn-lg">Checkout</button>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div id="main"> 
+
 <div class="container">
+
+<button class="btn btn-primary" onclick="openCart()">Shopping Cart </button>
 
 <!-- Product cards -->
 <div class="row row-cols-1 row-cols-md-3">
@@ -87,6 +211,7 @@ include "../external/add_to_cart.php";
 
                     <input type='hidden' name='product_name' value='".$row['name']."'>
                     <input type='hidden' name='price' value='".$row['price']."'>
+                    <input type='hidden' name='img_link' value='".$row['img_link']."'>
 
                     <button type='submit' name='add_to_cart' class='btn btn-primary ml-3'>Add to Cart</button>
             </div>
@@ -102,12 +227,10 @@ include "../external/add_to_cart.php";
 ?>
 </div>
 
-<!-- Shopping Cart -->
-<div class="shopping_cart">
-
 </div>
 
 </div>
+
 </body>
 
 </html>

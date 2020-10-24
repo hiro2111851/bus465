@@ -7,7 +7,6 @@
 -->
 <?php
 $cart_items = array();
-//session_destroy();
 
 
 if(isset($_POST['add_to_cart'])){
@@ -30,7 +29,8 @@ if(isset($_POST['add_to_cart'])){
                     'product_name' => $_POST['product_name'],
                     'batch_date' => $batch_date,
                     'quantity' => $_POST['quantity'],
-                    'price' => $_POST['price']
+                    'price' => $_POST['price'],
+                    'img_link' => $_POST['img_link']
                 );
         } else {// item exists in cart
             for ($i = 0; $i < count($cart_items); $i++){
@@ -47,7 +47,8 @@ if(isset($_POST['add_to_cart'])){
             'product_name' => $_POST['product_name'],
             'batch_date' => $batch_date,
             'quantity' => $_POST['quantity'],
-            'price' => $_POST['price']
+            'price' => $_POST['price'],
+            'img_link' => $_POST['img_link']
         );
     }
 };
