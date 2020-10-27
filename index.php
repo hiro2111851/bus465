@@ -248,7 +248,9 @@ include "external/navbar.php";
             JOIN batches b 
             ON b.id = bi.batch_id
             WHERE product_id = ".$row['id']."
-            AND bi.max_quantity-bi.quantity_sold > 0;";
+            AND bi.max_quantity-bi.quantity_sold > 0
+            AND b.start_date <= CURDATE()
+            AND b.end_date >= CURDATE();";
         
         $out = mysqli_query($conn, $query);
 

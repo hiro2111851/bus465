@@ -37,7 +37,7 @@ include "../external/add_batch.php";
 
 <div class="form-group">
     <label for="start_date">Start Date</label>
-    <input type="date" name="start_date" class="form-control" required>
+    <input type="date" name="start_date" class="form-control" value="<?php echo date('Y-m-d');?>" required>
 </div>
 
 <div class="form-group">
