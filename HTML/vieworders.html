@@ -56,28 +56,34 @@ h2{
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- This will link the Bootstrap css file to this HTML page allowing us to use the Bootstrap classes to style our HTML components.  -->
+<link rel="stylesheet" href="../css/bootstrap.css">
+
 </head><!-- for shopping cart icon--> 
+
 <div class="toppage" div style="display:flex; flex-direction: row; justify-content: left; align-items: center">
-<div class="header">
-<h1>Butterbean Cookies</h1>
-</div>
-<div class="header"> 
-<form action=""> <!-- idk where the search button goes after you hit submit--> 
-<div class="header">
-<input type="text" placeholder="Search.." name="search">
-</div>
-<div class="header"> 
-<button type="submit"><i class="fa fa-search"></i></button>
-</div>
-</form>
+  <div class="header">
+    <h1>Butterbean Cookies</h1>
+  </div>
+  <div class="header"> 
+    <form action=""> <!-- idk where the search button goes after you hit submit--> 
+      <div class="header">
+        <input type="text" placeholder="Search.." name="search">
+      </div>
+      <div class="header"> 
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </div>
+    </form>
+  </div>
+
+  <i class="fa fa-shopping-cart" style="font-size:36px"></i>
+
+  <div class="menu-icon"></div>
+  <div class="menu-icon"></div>
+  <div class="menu-icon"></div>
 </div>
 
-<i class="fa fa-shopping-cart" style="font-size:36px"></i>
-
-<div class="menu-icon"></div>
-<div class="menu-icon"></div>
-<div class="menu-icon"></div>
-</div>
 <body>
 
 <ul>
@@ -90,41 +96,116 @@ h2{
 My Orders
 </h2><hr>
 <div class="order">
-<p>
-Order #: <!--INSERT GENERATED ORDER NUMBER-->
-</p><br>
-<div class="productsummary">
-<img src="" alt="cookie pic">
-<p>Red Velvet Chip Cookies</p>
-<label>Qty:</label>
-<p>Price: $15</p>
+  <p>
+  Order #: <!--INSERT GENERATED ORDER NUMBER-->
+  </p><br>
+  <div class="productsummary">
+    <img src="" alt="cookie pic">
+    <p>Red Velvet Chip Cookies</p>
+    <label>Qty:</label>
+    <p>Price: $15</p>
+  </div>
+
+  <div class="ordersummary">
+    <h3>Order Summary</h3>
+    <body>
+      <label>Subtotal</label><br><br>
+      <label>Est. Shipping</label><br><br>
+      <label>Est. Taxes</label><br><br>
+      <label>Total</label><br><br>
+      <h3>Shipping Address</h3>
+      <p>
+      Street Address: <br><br>
+      City: <br><br>
+      Postal Code: <br><br>
+      </p>
+      <div class="buttons">
+        <a href=""><!-- ADD TRACK PACKAGE LINK--> 
+          <button style="margin: 15px">
+          Track Order
+          </button>
+        </a> 
+      </div>
+    </body>
+  </div>
 </div>
 
-<div class="ordersummary">
-<h3>Order Summary</h3>
-<body>
-<label>Subtotal</label><br><br>
-<label>Est. Shipping</label><br><br>
-<label>Est. Taxes</label><br><br>
-<label>Total</label><br><br>
+<!--Testing using collapsible dropdown for orders-->
+<!--Needs JS to work https://getbootstrap.com/docs/4.0/components/collapse/#via-data-attributes -->
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Order #: 1<!--INSERT GENERATED ORDER NUMBER-->
+        </button>
+      </h5>
+    </div>
 
-<h3>Shipping Address</h3>
-<p>
-Street Address: <br><br>
-City: <br><br>
-Postal Code: <br><br>
-</p>
-<div class="buttons">
-<a href=""><!-- ADD TRACK PACKAGE LINK--> 
-  <button style="margin: 15px">
-  Track Order
-  </button>
-</a> 
-
-</div>
-</body>
-</div>
-
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <!--Order #1 info-->
+        <div class="productsummary">
+          <img src="" alt="cookie pic">
+          <p>Red Velvet Chip Cookies</p>
+          <label>Qty:</label>
+          <p>Price: $15</p>
+        </div>
+      
+        <div class="ordersummary">
+          <h3>Order Summary</h3>
+          <body>
+            <label>Subtotal</label><br><br>
+            <label>Est. Shipping</label><br><br>
+            <label>Est. Taxes</label><br><br>
+            <label>Total</label><br><br>
+            <h3>Shipping Address</h3>
+            <p>
+            Street Address: <br><br>
+            City: <br><br>
+            Postal Code: <br><br>
+            </p>
+            <div class="buttons">
+              <a href=""><!-- ADD TRACK PACKAGE LINK--> 
+                <button style="margin: 15px">
+                Track Order
+                </button>
+              </a> 
+            </div>
+          </body>
+        </div>
+        <!--End of Order #1 info-->
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Order #: 2<!--INSERT GENERATED ORDER NUMBER-->
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Order #: 3<!--INSERT GENERATED ORDER NUMBER-->
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
 </div>
 
 </body>
