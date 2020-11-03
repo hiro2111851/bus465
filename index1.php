@@ -1,12 +1,10 @@
 <!-- 
-    Page Name: Mainpage
+    Page Name: Products Page
 
-    Page Description: The Mainpage of the website; has the products, 
+    Page Description: Displays all products 
 
-    Created By: Abbey
+    Created By: Hiro
 -->
-<!doctype html>
-
 <?php
 session_start();
 // session_destroy();
@@ -27,66 +25,16 @@ include "external/create_account.php";
 // check login form submission
 include "external/login.php";
 
+// adds a navbar
+include "external/navbar.php";
 ?>
 
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!DOCTYPE html>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <!--search icon from w3school-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<html lang=en>
 
-    <!-- CSS written by Abbey -->
-    <style>
-        .navitem {
-          border-style: groove;
-          box-sizing: border-box;
-          padding: 10px;
-          border: 0.5px solid grey;
-          background: #D3DEE5;
-        }
-
-        body {
-          background-color: #EADED6;
-        }
-
-        h1 {
-          font-size: 84pt;
-          font-family: "Vivaldi";
-        }
-
-        .col-md-6, .col-md-1, .col-md-5{
-          padding: 20pt;
-          margin: auto;
-        }
-
-        form.example input[type=text] {
-          padding: 10px;
-          font-size: 17px;
-          border: 1px solid grey;
-          float: left;
-          width: 80%;
-          background: #f1f1f1;
-          }
-
-        form.example button {
-          float: left;
-          width: 20%;
-          padding: 10px;
-          background: #DC747D;
-          color: white;
-          font-size: 17px;
-          border: 1px solid grey;
-          border-left: none;
-          cursor: pointer;
-          }
-    </style>
-
-    <!-- JS script for pop-up forms -->
+<head>
+    <link rel="stylesheet" href="css/bootstrap.css">
     <script>
         function openCart() {
             document.getElementById("myCart").style.width ="40%";
@@ -115,29 +63,30 @@ include "external/login.php";
             document.getElementById("acc_create_form").style.display = "none";
         }
     </script>
+    <title>Products</title>
+</head>
 
-    <title>Butterbean Bakery</title>
-  </head>
-
-
-  <body>
-
-<?php
-// adds a navbar
-include "external/navbar.php";
-?>
+<body>
 
 <!-- Shopping Cart -->
 <div id="myCart" class="h-100 float-right sticky-top" style="width:0; overflow:hidden;">
-    <div id="wrapper" class="border p-5">
+
+    <div id="wrapper" class="border border-dark p-5">
+
         <!-- This div wraps the shopping cart section -->
         <div id="cart" class="pb-3 border-bottom border-dark">
+
             <!-- Heading for Shopping Cart -->
             <h2 class="text-center mb-3">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-left float-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg" onclick="closeCart()">
                     <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
                 </svg>
+
                 Shopping Cart
+
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart-fill float-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                </svg>
             </h2>
 
             <!-- DIV for the section where the items added to the cart is displayed -->
@@ -171,33 +120,41 @@ include "external/navbar.php";
                                     </div>
                             </div>                
                         </div>
+                    
                     <?php
                         $subtotal += $cart_item['price'];    
                     }
                 ?>
+
             </div>
         </div>
+
         <!-- DIV for Order Summary section -->
         <div id="order-summary" class="py-3 border-bottom border-dark">
             <h2 class="text-center"> Order Summary </h2>
+
                 <div class="row">
                     <p class="col-sm-4">Subtotal: </p>
                     <p class="col-sm-8 text-right"> <?php echo "$".$subtotal;?></p>
                 </div>
+
                 <!-- Not Real Amount -->
                 <div class="row">
                     <p class="col-sm-4">Est. Shipping: </p>
                     <p class="col-sm-8 text-right"> <?php echo "$".$shipping;?></p>
                 </div>
+
                 <div class="row">
                     <p class="col-sm-4">Est. Taxes: </p>
                     <p class="col-sm-8 text-right"> <?php echo "$".round(($subtotal+$shipping)*$tax_rate, 2);?></p>
                 </div>
+
                 <div class="row">
                     <p class="col-sm-4">Estimated Total: </p>
                     <p class="col-sm-8 text-right"> <?php echo "$".round(($subtotal+$shipping)*(1+$tax_rate), 2);?></p>
                 </div>
         </div>
+
         <!-- This div holds the 2 buttons Continue Shopping and Checkout -->
         <div id="buttons py-3 border-bottom border-dark">
             <div class="row m-3">
@@ -212,8 +169,12 @@ include "external/navbar.php";
     </div>
 </div>
 
+<!-- Main Content -->
+<div id="main"> 
+<div class="container mt-3">
+
 <!-- Login Form -->
-<div id="login_form" style="display:none;" class="px-5 -y-3">
+<div id="login_form" style="display:none;">
     <h3>Account Login</h3>
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
     <div class="form-group">
@@ -230,7 +191,7 @@ include "external/navbar.php";
 </div>
 
 <!-- Account Creation Form -->
-<div id="acc_create_form" style="display:none;" class="px-5 py-3">
+<div id="acc_create_form" style="display:none;">
     <h3>Create Account</h3>
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
     <div class="form-group">
@@ -263,33 +224,22 @@ include "external/navbar.php";
 </div>
 
 <!-- Product cards -->
-<div class='my-5' id='products'>
+<div class="row row-cols-1 row-cols-md-3">
 <?php
     $sql = "SELECT id, name, price, description, img_link FROM products;";
     $result = mysqli_query($conn, $sql);
 
-    $counter = 0;
-
     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-        if($counter%2 == 0){
-            echo "<div class='row'>";
-        };
-
-        $counter++;
-
         echo "
-            <div class='col-sm-6 px-5'>
-            <div class='container' align='center'>
-                <img class='w-50' src='".$row['img_link']."' alt='Chocolate Chip Cookies'>
-                <h5 class='my-3'>".$row['name']." </h5>
-                <p>".$row['description']." </p>
-                <form action='".htmlspecialchars($_SERVER['PHP_SELF'])."' method='POST'>
-                    <input type='hidden' name='product_name' value='".$row['name']."'>
-                    <input type='hidden' name='price' value='".$row['price']."'>
-                    <input type='hidden' name='img_link' value='".$row['img_link']."'>
-                    <label for='quantity'>Quantity:</label>
-                    <input type='number' min='1' max='10' name='quantity' required>
-            ";
+            <div class='col mb-4'>
+                <div class='card h-100'>
+                    <img class='card-img-top' src='".$row['img_link']."'>
+                    <div class='card-body'>
+                        <h5 class'card-title mb-2'>".$row['name']."</h5>
+                        <h6 class='card-subtitle mb-2 text-muted'>$".$row['price']."</h6>
+                        <p class='card-text'>".$row['description']."</p>
+                    </div>
+                    <div class='card-footer'>";
 
         // Generate dropdown menu for available batch
         $query = "
@@ -305,18 +255,14 @@ include "external/navbar.php";
         $out = mysqli_query($conn, $query);
 
 
+        echo "<form action='".htmlspecialchars($_SERVER['PHP_SELF'])."' method='POST'>";
+
         if (mysqli_num_rows($out)==0) {
             echo "
-                <label for='batch'>Batch: </label>
+                <label for='batch'>Select Batch: </label>
                 <select name='batch' disabled>
                 <option> Product Not Available </option>
                 </select>
-                <br>
-                <label for='submit'> Price: $".$row['price']."/unit</label>
-                <button class='my-3' type='submit' name='add_to_cart' disabled>Add to Cart</button>
-                </form>
-                </div>
-                </div>
             ";
         } else {
             echo "
@@ -327,25 +273,43 @@ include "external/navbar.php";
             while ($batch = mysqli_fetch_array($out, MYSQLI_ASSOC)) {
                 echo "<option value='".$batch['id']."/".$batch['batch_name']."'>".$batch['batch_name']."</option>";
             };
-            
-            echo "
-                </select>
-                <br>
-                <label for='submit'> Price: $".$row['price']."/unit</label>
-                <button class='my-3' type='submit' name='add_to_cart'>Add to Cart</button>
-                </form>
-                </div>
-                </div>
-            ";
+
+            echo $batch['batch_name'];
+
+            // max is 10 for now
+            echo "</select>
+            <div class='form-inline'>
+
+                    <label for='email'>Quantity:</label>
+                    <input type='number' min='1' max='10' name='quantity' class='form-control ml-3' required>
+
+                    <input type='hidden' name='product_name' value='".$row['name']."'>
+                    <input type='hidden' name='price' value='".$row['price']."'>
+                    <input type='hidden' name='img_link' value='".$row['img_link']."'>
+
+                    <button type='submit' name='add_to_cart' class='btn btn-primary ml-3'>Add to Cart</button>
+            </div>
+
+            </form>";
         };
-
-        if($counter%2==0){
-            echo "</div>";
-        }
-
+        
+        echo "
+                    </div>
+                </div>
+            </div>";
     };
 ?>
+</div>
 
+</div>
 
-  </body>
+</div>
+
+</body>
+
 </html>
+
+<?php 
+// close database connection
+mysqli_close($conn); 
+?>

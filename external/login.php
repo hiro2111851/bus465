@@ -39,11 +39,4 @@ if(isset($_POST['submit_login'])) {
     };  
 };
 
-// if($_GET['logout']='true') {
-//     $_SESSION['customer_id'] = "";
-//     $_SESSION['customer_name'] = "";
-//     echo "<div class='alert alert-success' role='alert'>Logout Successful. </div>";
-// };
-
-
 ?>

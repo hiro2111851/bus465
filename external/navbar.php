@@ -10,7 +10,7 @@
 <div class="col-md-6"><h1 class="text-left" style="font-size:70px"><strong>Butterbean Bakery</strong></h1></div>
   <div class="col-md-5">
     <?php
-      if(isset($_SESSION['customer_name'])){
+      if(isset($_SESSION['customer_name'])&&$_SESSION['customer_name']!=""){
         echo "<p>Welcome ".$_SESSION['customer_name']."!</p>";
       };
     ?>
@@ -24,13 +24,15 @@
     echo "
       <div class='row pb-3'>
         <div class='col-sm-4 navitem' align=center>
-          <a href='#aboutus' class='text-dark'>About Us</a>
+          <button href='#aboutus' class='btn text-dark w-100'>About Us</button>
         </div>
         <div class='col-sm-4 navitem' align=center>
-          <p href='#thecookies' class='text-dark'>My Orders</p>
+          <button class='btn w-100'>My Orders</button>
         </div>
         <div class='col-sm-4 navitem' align=center>
-          <a class='text-dark'>Log Out</a>
+          <form action='".htmlspecialchars($_SERVER['PHP_SELF'])."' method='POST'>
+            <button type='submit' name='submit_logout' class='btn w-100'>Log Out</button>
+          </form>
         </div>
       </div>
     ";
@@ -39,13 +41,13 @@
       echo "
         <div class='row pb-3'>
           <div class='col-sm-4 navitem' align=center>
-            <a href='#aboutus' class='text-dark'>About Us</a>
+          <button href='#aboutus' class='btn text-dark w-100'>About Us</button>
           </div>
-          <div class='col-sm-4 navitem' align=center onclick='openCreateAccount()'>
-            Create an Account
+          <div class='col-sm-4 navitem' align=center>
+            <button class='btn w-100' onclick='openCreateAccount()'>Create an Account</button>
           </div>
-          <div class='col-sm-4 navitem' align=center onclick='openLogin()'>
-            Log In
+          <div class='col-sm-4 navitem' align=center>
+            <button class='btn w-100' onclick='openLogin()'>Log In</button>
           </div>
         </div>
       ";
