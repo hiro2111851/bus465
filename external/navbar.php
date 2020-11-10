@@ -6,73 +6,50 @@
     Created By: Hiro
 -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <a class="navbar-brand mr-auto" href="#">Store ABC </a>
-
-        <?php 
-          if(isset($_SESSION['customer_id']) && $_SESSION['customer_id'] != "") { 
-            // Display Customer Name
-            echo "<p class='nav-item mb-0 mr-3 text-light'> Welcome <strong>".$_SESSION['customer_name']."</strong>!</p>";
-
-            echo "
-            <form action='".htmlspecialchars($_SERVER['PHP_SELF'])."' method='POST' class='m-2 my-sm-0'>
-              <button type='submit' name='submit_logout' class='btn btn-outline-warning'>
-              <svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-door-closed' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-                <path fill-rule='evenodd' d='M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z'/>
-                <path d='M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z'/>
-              </svg>
-              Logout
-              </button>
-            </form>
-            ";
-            
-            // Link to My Orders Page
-            echo "
-              <a href='' class='btn btn-outline-primary m-2 my-sm-0'>
-              <svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-person-lines-fill' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-                <path fill-rule='evenodd' d='M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm2 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z'/>
-              </svg>
-              My Orders
-              </a>";
-
-            } else {
-              // Login and Create Account Button for non-user
-              echo "
-                <button class='btn btn-outline-success m-2 my-sm-0' onclick='openLogin()'>
-                  <svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-person-circle' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-                    <path d='M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z'/>
-                    <path fill-rule='evenodd' d='M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'/>
-                    <path fill-rule='evenodd' d='M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z'/>
-                  </svg>
-                  Login
-                </button>
-                <button class='btn btn-outline-success m-2 my-sm-0' onclick='openCreateAccount()'>
-                <svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-person-plus-fill' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-                  <path fill-rule='evenodd' d='M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.5-3a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z'/>
-                </svg>
-                Create Account
-              </button>";
-            };
-          if(isset($_SESSION['shopping_cart'])) {
-            //display shopping cart button if shopping cart has item
-            echo "
-              <button class='btn btn-outline-success m-2 my-sm-0' onclick='openCart()'>
-                <svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-cart4' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-                  <path fill-rule='evenodd' d='M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z'/>
-                </svg>
-                Shopping Cart
-              </button>";
-          } else {
-            //disable shopping cart button when empty
-            echo "
-            <button class='btn btn-outline-secondary m-2 my-sm-0' disabled>
-              <svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-cart4' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-                <path fill-rule='evenodd' d='M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z'/>
-              </svg>
-            Cart Empty
-            </button>";
-          };?> 
+<!--header--><div class="row" height=300>
+<div class="col-md-6"><h1 class="text-left" style="font-size:70px"><strong>Butterbean Bakery</strong></h1></div>
+  <div class="col-md-5">
+    <?php
+      if(isset($_SESSION['customer_name'])&&$_SESSION['customer_name']!=""){
+        echo "<p>Welcome ".$_SESSION['customer_name']."!</p>";
+      };
+    ?>
   </div>
-</nav>
+  <div class="col-md-1" onclick="openCart()" align="center"><i class="fa fa-shopping-cart" style="font-size:42px"></i></div>
+  </div>
 
+<?php 
+  if(isset($_SESSION['customer_id']) && $_SESSION['customer_id'] != "") { 
+    // Display Customer Name
+    echo "
+      <div class='row pb-3'>
+        <div class='col-sm-4 navitem' align=center>
+          <button href='#aboutus' class='btn text-dark w-100'>About Us</button>
+        </div>
+        <div class='col-sm-4 navitem' align=center>
+          <button class='btn w-100'>My Orders</button>
+        </div>
+        <div class='col-sm-4 navitem' align=center>
+          <form action='".htmlspecialchars($_SERVER['PHP_SELF'])."' method='POST'>
+            <button type='submit' name='submit_logout' class='btn w-100'>Log Out</button>
+          </form>
+        </div>
+      </div>
+    ";
+    } else {
+      // Login and Create Account Button for non-user
+      echo "
+        <div class='row pb-3'>
+          <div class='col-sm-4 navitem' align=center>
+          <button href='#aboutus' class='btn text-dark w-100'>About Us</button>
+          </div>
+          <div class='col-sm-4 navitem' align=center>
+            <button class='btn w-100' onclick='openCreateAccount()'>Create an Account</button>
+          </div>
+          <div class='col-sm-4 navitem' align=center>
+            <button class='btn w-100' onclick='openLogin()'>Log In</button>
+          </div>
+        </div>
+      ";
+    };
+?> 

@@ -3,9 +3,47 @@
 
     Page Description: PHP file handling Account login
 
-    Created By: Hiro
+    Created By: Oliver
 -->
+
+
+<html>
+<head>
+
+<!-- JS Script for redirect -->
+<script>
+        function redirect() {
+            location.replace("/bus465/admin/payment.php")
+        }
+    </script>
+
+<title>Login Response</title>
+</head>
+<body>
+<h1>Login Response</h1>
+
 <?php
+echo "<p>Attempted login at ".date('H:i, jS F Y')."</p>";
+?>
+
+<?php
+// Gathering the post data
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+
+if ($username == "Admin" and $password == "Temp") {
+    echo "<p> Successfully logged in! </p>";
+    header("Location: /bus465/admin/my_products.php");
+}	else {
+	echo "<p> Sorry, the username or password is incorrect. </p>";
+}
+?>
+
+</body>
+</html>
+
+<?php
+/*
 if(isset($_POST['submit_login'])) {
     // get user form input
     $email = $_POST['email'];
@@ -39,4 +77,11 @@ if(isset($_POST['submit_login'])) {
     };  
 };
 
+// if($_GET['logout']='true') {
+//     $_SESSION['customer_id'] = "";
+//     $_SESSION['customer_name'] = "";
+//     echo "<div class='alert alert-success' role='alert'>Logout Successful. </div>";
+// };
+
+*/
 ?>
