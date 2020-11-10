@@ -3,19 +3,20 @@
 
     Page Description: HTML page for login.
 
-    Wireframe: Second Wireframe on https://balsamiq.cloud/su2bnrx/pdwe618/rAA4F, named Login
-
     Created By: Oliver
 -->
 
 <?php
 session_start();
 
+// check login form submission
+//include "/adminlogin.php";
+
 //handles database connection
 include "../external/db_connect.php";
 
-// check login form submission
-include "../admin/admin_login.php";
+// check account creation form submission
+include "../external/create_admin.php";
 
 ?>
 
@@ -103,37 +104,42 @@ include "../admin/admin_login.php";
     <!-- This will link the Bootstrap css file to this HTML page allowing us to use the Bootstrap classes to style our HTML components.  -->
     <link rel="stylesheet" href="../css/bootstrap.css">
 
-    <title>Admin Login</title>
+    <title>Admin Create</title>
 </head>
 
 <body>
-  <div class="outer">
-    <div class="middle">
-      <div class="inner">
-        <h2>Butterbean Bakery</h2><p>
-        <h3>Admin Login</h3>
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
-          <table border="0">
-            <tr bgcolor="#cccccc">
-            </tr>
-            <tr>
-              <td>Username</td>
-              <td align="center"><input type="text" name="username" size="10" maxlength="10" required/></td>
-            </tr>
-            <tr>
-              <td>Password</td>
-              <td align="center"><input type="password" name="password" size="10" maxlength="10" required/></td>
-            </tr>
-            <tr>
-              <td colspan='1' align='center'><input type='submit' name='submit_login' class="btn btn-primary" value='Login'/></td>
-              <!--link reference to reset password-->
-              <td><a href="#passwordreset">Forgot Password?</a></td>
-            </tr>
-          </table>
+
+<div class="outer">
+  <div class="middle">
+    <div class="inner">
+      <!-- Account Creation Form -->
+      <div id="acc_create_form" class="px-5 py-3">
+        <h3>Create an Admin Account</h3>
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" name="first_name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name" class="form-control" required>
+          </div>
+          <button type="submit" name="submit_create" class="btn btn-primary">Submit</button>
         </form>
       </div>
     </div>
   </div>
+</div>
+
 </body>
 
 </html>
+
