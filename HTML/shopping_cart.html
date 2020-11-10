@@ -4,202 +4,214 @@
     Page Description: HTML page for the shopping cart. This will eventually be integrated as a pop-up on the right hand side of the products page.
 
     Wireframe: Fourth Wireframe on https://balsamiq.cloud/s4m5qc/pp2pcs5/r7C04, named View Shopping Cart
-
-    Created By: Hiro
+    
 -->
 
 <!DOCTYPE html>
 
 <html lang=en>
 
-<head>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!--search icon from w3school-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+        <title>Butterbean Bakery Shipping Address</title>
+      </head>
 
-    <!-- This will link the Bootstrap css file to this HTML page allowing us to use the Bootstrap classes to style our HTML components.  -->
-    <link rel="stylesheet" href="../css/bootstrap.css">
+<style>
 
-    <style>
-        .scroll {
-            height: 20em;
-            overflow-y: scroll;
-        }
-    </style>
+.container-fluid{
+  font-family: "Bahnschrift";
+}
 
-    <title>Shopping Cart</title>
-</head>
+.container{
+  padding: 30px;  
+  padding-left: 30px;
+  padding-top: 20px;
+  padding-right: 30px;
+  padding-bottom: 20px;
+  border-style: solid;
+  border-width: thick;
+  border-color: #F79F92;
+  background-color: #f1f1f1;
+}
 
-<body class="w-50 h-100 float-right">
+h4{
+ padding-top: 10px;
+}
 
-<!-- This div wraps the entire shopping cart. The class "container" that I gave gives margin on both right and left side -->
-<div id="wrapper" class="border border-dark mx-3 p-5">
+select{
+  padding: 7px;
+}
+</style>
 
-    <!-- This div wraps the shopping cart section -->
-    <div id="cart" class="pb-3 border-bottom border-dark">
-
-        <!-- Heading for Shopping Cart -->
-        <h2 class="text-center">
-            <!-- Bootstrap icon from https://icons.getbootstrap.com/icons/chevron-left/ -->
-            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-left float-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-            </svg>
-        
-            Shopping Cart
-        
-            <!-- Bootstrap icon from https://icons.getbootstrap.com/icons/cart-fill/ -->
-            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart-fill float-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
-            </svg>
-        </h2>
-
-        <!-- DIV for the section where the items added to the cart is displayed -->
-        <div id="products" class="px-5 scroll">
-        
-            <!-- 1st product -->
-            <div id="product 1" class="row">
-                <div class="col-3">
-                    <img src="../img/placeholder.png" class="img-thumbnail">
-                </div>
-                <div class="col-9">
-                    <p>Red Velvet Chip Cookie</p>
-                    <form>
-                        <div class="row">
-                            <div class="col-4">
-                                <p>Qty:</label>
-                            </div>
-                            <div class="col-8">
-                                <input type="number" name="quantity" class="form-control" value="1" required>
-                            </div>
-                        </div>
-                    </form>
-                        <div class="row">
-                            <p class="col-sm-4">Price:</p>
-                            <p class="col-sm-8 text-right">$15.00</p>
-                        </div>
-                </div>
-            </div>
-        
-            <!-- 2nd product -->
-            <div id="product 2" class="row">
-                <div class="col-3">
-                    <img src="../img/placeholder.png" class="img-thumbnail">
-                </div>
-                <div class="col-9">
-                    <p>Chocolate Chip Cookie</p>
-                    <form>
-                        <div class="row">
-                            <div class="col-4">
-                                <p>Qty:</label>
-                            </div>
-                            <div class="col-8">
-                                <input type="number" name="quantity" class="form-control" value="3" required>
-                            </div>
-                        </div>
-                    </form>
-                        <div class="row">
-                            <p class="col-sm-4">Price:</p>
-                            <p class="col-sm-8 text-right">$12.00</p>
-                        </div>
-                </div>
-            </div>
-        
-            <!-- 1st product -->
-            <div id="product 1" class="row">
-                <div class="col-3">
-                    <img src="../img/placeholder.png" class="img-thumbnail">
-                </div>
-                <div class="col-9">
-                    <p>Red Velvet Chip Cookie</p>
-                    <form>
-                        <div class="row">
-                            <div class="col-4">
-                                <p>Qty:</label>
-                            </div>
-                            <div class="col-8">
-                                <input type="number" name="quantity" class="form-control" value="1" required>
-                            </div>
-                        </div>
-                    </form>
-                        <div class="row">
-                            <p class="col-sm-4">Price:</p>
-                            <p class="col-sm-8 text-right">$15.00</p>
-                        </div>
-                </div>
-            </div>
-        
-            <!-- 2nd product -->
-            <div id="product 2" class="row">
-                <div class="col-3">
-                    <img src="../img/placeholder.png" class="img-thumbnail">
-                </div>
-                <div class="col-9">
-                    <p>Chocolate Chip Cookie</p>
-                    <form>
-                        <div class="row">
-                            <div class="col-4">
-                                <p>Qty:</label>
-                            </div>
-                            <div class="col-8">
-                                <input type="number" name="quantity" class="form-control" value="3" required>
-                            </div>
-                        </div>
-                    </form>
-                        <div class="row">
-                            <p class="col-sm-4">Price:</p>
-                            <p class="col-sm-8 text-right">$12.00</p>
-                        </div>
-                </div>
-            </div>
-        
-        <!-- div end tag for <div id="products"> -->
+     <body>
+     <div class="container">
+      <!--title--><div class="row">
+     <div class="col">
+    <button type="button" class="btn btn-default btn-sm">
+              <span class="glyphicon glyphicon-menu-left"></span> Back to Browsing
+            </button>
+     </div>
+    
+     </div>
+     <h1 style="font-family: Vivaldi">
+        <strong>
+           Shopping Cart
+        </strong>
+        </h1><hr><br>
+        <div class="container-fluid">
+      <!--ITEM ONE--><div class="row">
+        <div class="col-4">
+        <img class="img-responsive" src="https://savorysweetlife.com/wp-content/uploads/2009/10/CHOCOLATE-CHIP-COOKIES-3-1024x1024.jpg" alt="Chocolate chip cookies" width="170">    
         </div>
-    <!-- div end tag for <div id="cart"> -->
+        <div class="col-8">
+    
+          <h3 style="font-family: Vivaldi">
+          Chocolate Chip Cookies
+          </h3>
+    
+          <div class="row">
+            <div class="col-6">
+            <p>Quantity:</p>
+            </div>
+            <div class="col-6" style="text-align: right">
+            <select name="qty" value="qty">
+              <option value="1_dozen">1 Dozen</option>
+              <option value="2_dozen">2 Dozen</option>
+              <option value="3_dozen">3 Dozen</option>
+              <option value="4_dozen">4 Dozen</option>
+            </select>  
+      </div>
+          </div><br>
+          <div class="row">
+            <div class="col-6">
+            <p>Price:</p>
+            </div>
+            <div class="col-6">
+            <p style="text-align: right">
+                 $15/dozen
+            </p>
+      </div>
+          </div>
+        </div>
+      <br><hr></div><br>
+      <!--ITEM TWO--><div class="row">
+        <div class="col-4">
+        <img class="img-responsive" src="https://tspastry.com/wp-content/uploads/2019/12/Red-Velvet-Cookies.jpg" alt="Chocolate chip cookies" width="170">    
+        </div>
+        <div class="col-8">
+    
+          <h3 style="font-family: Vivaldi">
+          Red Velvet Cookies
+          </h3>
+    
+          <div class="row">
+            <div class="col-6">
+            <p>Quantity:</p>
+            </div>
+            <div class="col-6" style="text-align: right">
+            <select name="qty" value="qty">
+              <option value="1_dozen">1 Dozen</option>
+              <option value="2_dozen">2 Dozen</option>
+              <option value="3_dozen">3 Dozen</option>
+              <option value="4_dozen">4 Dozen</option>
+            </select>  
+      </div>
+          </div><br>
+          <div class="row">
+            <div class="col-6">
+            <p>Price:</p>
+            </div>
+            <div class="col-6">
+            <p style="text-align: right">
+                 $15/dozen
+            </p>
+      </div>
+          </div>
+        </div>
+      </div>
+    </div><br>
+    
+     <h1 style="font-family: Vivaldi">
+        <strong>
+           Order Summary
+        </strong>
+        </h1><hr>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col" style="text-align: left">
+           <label>
+             Subtotal:
+           </label>
+        </div>
+        <div class="col" style="text-align: right">
+           <p>
+             $135.60
+           </p>    
+        </div>
+      </div>
+      <div class="row">
+        <div class="col" style="text-align: left">
+           <label>
+             Est. Shipping:
+           </label>
+        </div>
+        <div class="col" style="text-align: right">
+           <p>
+             $4.95
+           </p>    
+        </div>
+      </div>
+      <div class="row">
+        <div class="col" style="text-align: left">
+           <label>
+             Est. Taxes:
+           </label>
+        </div>
+        <div class="col" style="text-align: right">
+           <p>
+             $13.66
+           </p>    
+        </div>
+      </div>
+      <div class="row">
+        <div class="col" style="text-align: left">
+           <label>
+             Est. Total:
+           </label>
+        </div>
+        <div class="col" style="text-align: right">
+           <p>
+             $154.21
+           </p>    
+        </div>
+      </div>
+    </div><br><br>
+    
+    
+    <!--bottom buttons--><div class="row">
+        <div class="col-6">
+        </div>
+    <!--Go back to shopping button--><div class="col-3"align=right>
+          <div class="form-group">
+     <input type="button" class="form-control" id="back" align="center" value="Shop More" onclick="INSERT THE HREF">
+          </div>
+          </div>
+    <!--submit button--><div class="col-3"align=right >
+          <div class="form-group">
+     <input type="submit" class="form-control" id="submit" align="center">
+          </div>
+          </div></div>
     </div>
-
-    <!-- DIV for Order Summary section -->
-    <!-- Refer to: https://getbootstrap.com/docs/4.5/layout/grid/ for the use of class "row" "col" -->
-    <div id="order-summary" class="py-3 border-bottom border-dark">
-        <h2 class="text-center"> Order Summary </h2>
-
-            <div class="row">
-                <p class="col-sm-4">Subtotal: </p>
-                <p class="col-sm-8 text-right"> $135.60</p>
-            </div>
-
-            <div class="row">
-                <p class="col-sm-4">Est. Shipping: </p>
-                <p class="col-sm-8 text-right"> $4.95</p>
-            </div>
-
-            <div class="row">
-                <p class="col-sm-4">Est. Taxes: </p>
-                <p class="col-sm-8 text-right"> $13.66</p>
-            </div>
-
-            <div class="row">
-                <p class="col-sm-4">Estimated Total: </p>
-                <p class="col-sm-8 text-right"> $154.21</p>
-            </div>
-    <!-- div end tag for <div id='order-summary'> -->
-    </div>
-
-    <!-- This div holds the 2 buttons Continue Shopping and Checkout -->
-    <div id="buttons py-3 border-bottom border-dark">
-        
-        <!-- Div that holds two side-by-side buttons -->
-        <div class="row m-3">
-            <div class="col mx-2">
-                <button type="button" class="col btn btn-secondary btn-lg">Continue Shopping</button>
-            </div>
-            <div class="col mx-2">
-                <button type="button" class="col btn btn-secondary btn-lg">Checkout</button>
-            </div>
-        </div> 
-
-    <!-- div end tag for <div id="buttons"> -->
-    </div>
-
-<!-- div end tag for <div id="wrapper"> -->
-</div>
-
-</body>
-
-</html>
+    
+    
+    </body>
+    </html>
