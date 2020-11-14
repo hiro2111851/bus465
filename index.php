@@ -93,7 +93,7 @@ include "external/popup_forms.php";
 
         // Generate dropdown menu for available batch
         $query = "
-            SELECT bi.id, DATE_FORMAT(b.delivery_date, '%W, %M %D') as batch_name, bi.max_quantity, bi.quantity_sold
+            SELECT bi.id, DATE_FORMAT(b.delivery_date, '%W, %M %D') as batch_name, bi.max_quantity, bi.quantity_sold, bi.max_quantity-bi.quantity_sold as qty_available
             FROM batch_items bi 
             JOIN batches b 
             ON b.id = bi.batch_id
@@ -112,7 +112,7 @@ include "external/popup_forms.php";
                 <option> Product Not Available </option>
                 </select>
                 <br>
-                <label for='submit'> Price: $".$row['price']."/unit</label>
+                <p> Price: $".$row['price']."/unit</p>
                 <button class='my-3' type='submit' name='add_to_cart' disabled>Add to Cart</button>
                 </form>
                 </div>
@@ -121,17 +121,23 @@ include "external/popup_forms.php";
         } else {
             echo "
                 <label for='batch'>Select Batch: </label>
-                <select name='batch'>
+                <select name='batch' onchange='batchQuantity(this)'>
+                    <option id='".$row['id']."_default' selected='selected' value='0'> Select Batch </option>
             ";
+            
+            // create assoc array to store batch-quantity pairs
+            $qty_array = array();
 
             while ($batch = mysqli_fetch_array($out, MYSQLI_ASSOC)) {
-                echo "<option value='".$batch['id']."/".$batch['batch_name']."'>".$batch['batch_name']."</option>";
+                //batch dropdown
+                echo "<option value='".$row['id']."|".$batch['qty_available']."_".$batch['id']."/".$batch['batch_name']."'>".$batch['batch_name']."</option>";
             };
             
             echo "
                 </select>
                 <br>
-                <label for='submit'> Price: $".$row['price']."/unit</label>
+                <p> Quantity Available in Batch: <span class='badge badge-secondary' id='qty_".$row['id']."'>-</span> </label>
+                <p> Price: $".$row['price']."/unit</p>
                 <button class='my-3' type='submit' name='add_to_cart'>Add to Cart</button>
                 </form>
                 </div>
@@ -147,5 +153,6 @@ include "external/popup_forms.php";
 ?>
 
 </div>
+<p id='qty_counter' align=center>HERE</p>
 </body>
 </html>

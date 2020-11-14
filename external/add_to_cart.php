@@ -11,7 +11,7 @@ $cart_items = array();
 
 if(isset($_POST['add_to_cart'])){
     // breakdown batch related input
-    $batch_info = explode("/", $_POST['batch']);
+    $batch_info = explode("/", substr($_POST['batch'], strpos($_POST['batch'], "_")+1));
     $batch_item_id = $batch_info[0];
     $batch_date = $batch_info[1];
     
