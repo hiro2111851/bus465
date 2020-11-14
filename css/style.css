@@ -1,0 +1,57 @@
+.navitem {
+    border-style: groove;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 0.5px solid grey;
+    background: #D3DEE5;
+}
+
+html {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.logo {
+    font-family: "Vivaldi";
+    font-weight: bold;
+    font-size: 70px;
+}
+
+.cart-heading {
+    font-family: "Vivaldi";
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.cart-subheading {
+    font-family: "Vivaldi";
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.product-heading {
+    font-family: "Vivaldi";
+    font-weight: bold;
+    font-size: 36px;
+}
+ 
+#myCart{
+    width: 0; 
+    overflow: hidden;
+    height: 100%;
+}
+
+#cartWrapper {
+    border-style: solid;
+    border-width: thick;
+    border-color: #F79F92;
+    background-color: #f1f1f1;
+}
+
+#cartProducts {
+    font-family: "Bahnschrift";
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 20em;
+}
