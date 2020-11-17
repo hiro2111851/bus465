@@ -153,6 +153,9 @@ include "external/popup_forms.php";
 ?>
 
 </div>
-<p id='qty_counter' align=center>HERE</p>
+
+<button type="button" id="btn1" disabled>Test</button>
+<button type="button" onclick="enableButton();">Enable Button Above</button>
+
 </body>
 </html>
