@@ -93,7 +93,7 @@ include "external/popup_forms.php";
 
         // Generate dropdown menu for available batch
         $query = "
-            SELECT bi.id, DATE_FORMAT(b.delivery_date, '%W, %M %D') as batch_name, bi.max_quantity, bi.quantity_sold, bi.max_quantity-bi.quantity_sold as qty_available
+            SELECT bi.id, DATE_FORMAT(b.delivery_date, '%W, %M %D') as batch_name
             FROM batch_items bi 
             JOIN batches b 
             ON b.id = bi.batch_id
@@ -121,7 +121,7 @@ include "external/popup_forms.php";
         } else {
             echo "
                 <label for='batch'>Select Batch: </label>
-                <select name='batch' onchange='batchQuantity(this)'>
+                <select name='batch' onchange='batchQuantity(this.value)'>
                     <option id='".$row['id']."_default' selected='selected' value='0'> Select Batch </option>
             ";
             
@@ -130,13 +130,14 @@ include "external/popup_forms.php";
 
             while ($batch = mysqli_fetch_array($out, MYSQLI_ASSOC)) {
                 //batch dropdown
-                echo "<option value='".$row['id']."|".$batch['qty_available']."_".$batch['id']."/".$batch['batch_name']."'>".$batch['batch_name']."</option>";
+                echo "<option value='".$row['id']."/".$batch['id']."/".$batch['batch_name']."'>".$batch['batch_name']."</option>";
             };
             
             echo "
                 </select>
                 <br>
-                <p> Quantity Available in Batch: <span class='badge badge-secondary' id='qty_".$row['id']."'>-</span> </label>
+                <p> Quantity Available in Batch: </p>
+                <div id='qty_".$row['id']."'></div>
                 <p> Price: $".$row['price']."/unit</p>
                 <button class='my-3' type='submit' name='add_to_cart'>Add to Cart</button>
                 </form>

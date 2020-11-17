@@ -25,15 +25,26 @@ function closeForm() {
     document.getElementById("acc_create_form").style.display = "none";
 }
 
-function batchQuantity(selectObject) {
-    var batchinfo = selectObject.value;
-    var id_qty = batchinfo.split('_')[0];
-    var id = "qty_"+id_qty.split('|')[0];
-    var qty = id_qty.split('|')[1];
-    // Display quantity
-    document.getElementById(id).innerHTML = qty;
-    // remove default option
-    var def_id = id_qty.split('|')[0]+"_default";
-    var def_option = document.getElementById(def_id);
-    def_option.remove();
+function batchQuantity(str) {
+    // AJAX to retrieve quantity available in batch
+    var qty_id = "qty_"+str.split('/')[0];
+    var batch = str.split('/')[1];
+    if (str == "") {
+    } else {
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById(qty_id).innerHTML = this.responseText
+            }
+        };
+        xmlhttp.open("GET", "external/batch_quantity.php?batch="+batch, true);
+        xmlhttp.send();
+    }
+    //remove default option
+    var defop = str.split('/')[0]+"_default";
+    document.getElementById(defop).style.display = 'none';
 }
