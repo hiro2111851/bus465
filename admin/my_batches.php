@@ -13,6 +13,9 @@ include "../external/db_connect.php";
 
 //handles batch creation
 include "../external/add_batch.php";
+
+//adds a navbar
+include "admin_nav.php";
 ?>
 
 <!DOCTYPE html>

@@ -11,6 +11,9 @@ session_start();
 
 //handles database connection
 include "../external/db_connect.php";
+
+//adds a navbar
+include "admin_nav.php";
 ?>
 
 <!DOCTYPE html>

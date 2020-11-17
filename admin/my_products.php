@@ -16,6 +16,9 @@ include "../external/add_product.php";
 
 //handles removing products
 include "../external/remove_product.php";
+
+//adds a navbar
+include "admin_nav.php";
 ?>
 
 <!DOCTYPE html>
