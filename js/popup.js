@@ -27,8 +27,8 @@ function closeForm() {
 
 function batchQuantity(str) {
     // AJAX to retrieve quantity available in batch
-    var qty_id = "qty_"+str.split('/')[0];
-    var batch = str.split('/')[1];
+    var qty_id = "qty_"+str.split('_')[0];
+    var batch = str.split('_')[1];
     if (str == "") {
     } else {
         if (window.XMLHttpRequest) {
@@ -38,13 +38,18 @@ function batchQuantity(str) {
         }
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById(qty_id).innerHTML = this.responseText
+                document.getElementById(qty_id).innerHTML = this.responseText;
+                var cartButton = document.createElement('button');
+                cartButton.innerHTML = "Add to Cart";
+                cartButton.setAttribute("name", "add_to_cart");
+                cartButton.setAttribute("type", "submit");
+                document.getElementById(qty_id).parentElement.after(cartButton);
             }
         };
         xmlhttp.open("GET", "external/batch_quantity.php?batch="+batch, true);
         xmlhttp.send();
     }
     //remove default option
-    var defop = str.split('/')[0]+"_default";
+    var defop = str.split('_')[0]+"_default";
     document.getElementById(defop).style.display = 'none';
 }

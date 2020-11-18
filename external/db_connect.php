@@ -1,11 +1,3 @@
-<!-- 
-    Page Name: Database Connection
-
-    Page Description: PHP file handling PHP to MySQL connection using the "dev" account
-
-    Created By: Hiro
--->
-
 <?php
 //database account credentials
 $servername = "localhost";

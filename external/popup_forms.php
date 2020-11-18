@@ -92,22 +92,21 @@
         
         <!--bottom buttons-->
         <div class="row">
-            <div class="col-6">
+            <div class="col-1"></div>
+            <div class="col-4">
+                <!-- Empty Cart -->
+                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
+                    <input type="submit" name="empty_cart" class="btn btn-warning form-control" value="Empty Cart" align="center">
+                </form>
             </div>
-
-            <!--Go back to shopping button-->
-            <div class="col-3" align=right>
-                <div class="form-group">
-                    <input type="button" class="form-control" id="back" align="center" value="Shop More" onclick="INSERT THE HREF">
-                </div>
+            <div class="col-2"></div>
+            <div class="col-4">
+                <!-- Checkout -->
+                <form action="" method="POST">
+                    <input type="submit" class="btn btn-primary form-control" id="submit" value="Checkout" align="center">
+                </form>
             </div>
-
-            <!--submit button-->
-            <div class="col-3"align=right >
-                <div class="form-group">
-                    <input type="submit" class="form-control" id="submit" align="center">
-                </div>
-            </div>
+            <div class="col-1"></div>
         </div>
     </div>
 </div>

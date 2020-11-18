@@ -113,7 +113,6 @@ include "external/popup_forms.php";
                 </select>
                 <br>
                 <p> Price: $".$row['price']."/unit</p>
-                <button class='my-3' type='submit' name='add_to_cart' disabled>Add to Cart</button>
                 </form>
                 </div>
                 </div>
@@ -130,16 +129,14 @@ include "external/popup_forms.php";
 
             while ($batch = mysqli_fetch_array($out, MYSQLI_ASSOC)) {
                 //batch dropdown
-                echo "<option value='".$row['id']."/".$batch['id']."/".$batch['batch_name']."'>".$batch['batch_name']."</option>";
+                echo "<option value='".$row['id']."_".$batch['id']."_".$batch['batch_name']."'>".$batch['batch_name']."</option>";
             };
             
             echo "
                 </select>
                 <br>
-                <p> Quantity Available in Batch: </p>
-                <div id='qty_".$row['id']."'></div>
                 <p> Price: $".$row['price']."/unit</p>
-                <button class='my-3' type='submit' name='add_to_cart'>Add to Cart</button>
+                <p> Quantity Available in Batch: <span class='badge badge-secondary' id='qty_".$row['id']."'>-</span> </p>
                 </form>
                 </div>
                 </div>
