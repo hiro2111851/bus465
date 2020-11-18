@@ -10,7 +10,7 @@
 <div id="navbar" style="background-color: #EADED6;">
 <div class="row py-4">
   <div class="col-10">
-      <h1 class="logo">&nbsp;&nbsp;Butterbean Bakery</h1>
+      <h1 class="logo"><a href='index.php' style="color:inherit; text-decoration:inherit;">&nbsp;&nbsp;Butterbean Bakery</a></h1>
   </div>
   <div class="col-2">
       <?php if (empty($_SESSION['shopping_cart'])) {

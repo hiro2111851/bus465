@@ -91,7 +91,15 @@ include "external/popup_forms.php";
             </div>";
         }
     ?>
-    <form class="form-inline" action="" id="checkout_form">
+    <form class="form-inline" action="orderconfirmation.php" method="POST" id="checkout_form">
+    
+     <!-- Guest or Logged in -->
+    <input type="hidden" name="guest" value="
+    <?php if(isset($_SESSION['customer_id']) && $_SESSION['customer_id'] != "") {
+        echo '0';
+    } else {
+        echo '1';
+    }?>">
 
     <!-- First Row -->
     <h3 class='my-3'>Customer Information</h3>
@@ -167,7 +175,7 @@ include "external/popup_forms.php";
 
     <!-- Sixth Row -->
     <div class="row w-100">
-        <input class='w-75 mx-auto btn btn-primary mt-2' type='submit' value='Checkout'>
+        <input class='w-75 mx-auto btn btn-primary mt-2' type='submit' name='submit_checkout' value='Checkout'>
     </div>
 
     </form>

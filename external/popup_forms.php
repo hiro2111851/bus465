@@ -110,7 +110,7 @@ $shipping = 4.95;
             <div class="col-6">
                 <!-- Checkout -->
                 <form action="checkout.php" method="POST">
-                    <input type="submit" class="btn btn-primary form-control" id="submit_checkout" value="Checkout" align="center">
+                    <input type="submit" class="btn btn-primary form-control" id="submit_proceed_checkout" value="Proceed to Checkout" align="center">
                 </form>
             </div>
         <?php } ?>

@@ -19,8 +19,8 @@ if(isset($_POST['submit_create'])) {
     echo "<div class='alert alert-secondary' role='alert'>Create Account Form submitted with email: ".$email."</div>";
 
     $sql = "
-    INSERT INTO customers (email, password, dob, first_name, last_name, phone)
-    VALUES ('"
+    INSERT INTO customers (guest, email, password, dob, first_name, last_name, phone)
+    VALUES ('0', '"
         .$email."', '"
         .$pwd_hash."', '"
         .$dob."', '"
