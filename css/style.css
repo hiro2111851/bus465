@@ -36,11 +36,6 @@ html {
     font-size: 36px;
 }
  
-#myCart{
-    width: 0; 
-    overflow: hidden;
-    height: 100%;
-}
 
 #cartWrapper {
     border-style: solid;
@@ -54,17 +49,4 @@ html {
     overflow-y: scroll;
     overflow-x: hidden;
     height: 20em;
-}
-
-
-#shipping {
-    border-style: solid;
-    border-width: thick;
-    border-color: #DC747D;
-    background-color: #f1f1f1;
-    padding-left: 30px;
-    padding-top: 20px;
-    padding-right: 30px;
-    padding-bottom: 50px;
-    text-align: left;
 }

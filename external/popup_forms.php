@@ -5,19 +5,25 @@
 
     Created By: Hiro
 -->
+<?php
+// Need to track and adjust tax rates elsewhere
+$tax_rate = 0.12;
+$shipping = 4.95;
+?>
 <!-- Shopping Cart -->
-<div class="float-right sticky-top" id="myCart">
+<div class="float-right sticky-top mt-3" id="myCart" style="<?php if(basename($_SERVER['PHP_SELF']) == "index.php") {echo "width: 0; overflow: hidden; height: 100%;";} else {echo "width: 40%; overflow: hidden; height: 100%;";} ?>">
     <div class="container" id="cartWrapper">
         <!--Back Button-->
-        <button type="button" onclick="closeCart();" class="btn btn-light btn-sm mt-3">
-            <!-- Back icon -->
-            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+        <?php if(basename($_SERVER['PHP_SELF']) == "index.php") { echo "
+            <button type='button' onclick='closeCart();'' class='btn btn-light btn-sm mt-3'>
+            <svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-chevron-left' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+                <path fill-rule='evenodd' d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/>
             </svg>
             Back to Browsing
         </button>
+        ";}?>
         <!-- Title -->
-        <h1 class="cart-heading my-1">Shopping Cart</h1>
+        <h1 class="cart-heading mt-3">Shopping Cart</h1>
         <!-- Cart Products -->
         <div class="scroll" id="cartProducts">
             <?php  
@@ -90,23 +96,24 @@
             </div>
         </div>
         
-        <!--bottom buttons-->
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-4">
+        <?php
+        if(basename($_SERVER['PHP_SELF']) == "index.php") {
+            ?>
+            <!--bottom buttons-->
+            <div class="row my-3">
+            <div class="col-6">
                 <!-- Empty Cart -->
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
                     <input type="submit" name="empty_cart" class="btn btn-warning form-control" value="Empty Cart" align="center">
                 </form>
             </div>
-            <div class="col-2"></div>
-            <div class="col-4">
+            <div class="col-6">
                 <!-- Checkout -->
-                <form action="" method="POST">
-                    <input type="submit" class="btn btn-primary form-control" id="submit" value="Checkout" align="center">
+                <form action="checkout.php" method="POST">
+                    <input type="submit" class="btn btn-primary form-control" id="submit_checkout" value="Checkout" align="center">
                 </form>
             </div>
-            <div class="col-1"></div>
+        <?php } ?>
         </div>
     </div>
 </div>

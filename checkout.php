@@ -6,6 +6,7 @@
     Created By:
 -->
 <?php
+
 session_start();
 //handles database connection
 include "external/db_connect.php";
@@ -48,6 +49,16 @@ include "external/logout.php";
 body {
   background-color: #EADED6;
 }
+
+#shipping {
+    border-style: solid;
+    border-width: thick;
+    border-color: #DC747D;
+    background-color: #f1f1f1;
+    margin-left: 2%;
+    margin-right: 42%;
+}
+
 </style>
 
 <?php
@@ -59,23 +70,31 @@ include "external/popup_forms.php";
 
 <body>
 
-<div class="container my-5" id="shipping">
-    <h3 class='logo'>
+<div class="main py-3 px-3 mt-3" id="shipping">
+    <h3 class='logo mb-3'>
     Shipping Information:
     </h3>
     <?php
     // check if user is logged in for an option to used saved address info
         if(isset($_SESSION['customer_id']) && $_SESSION['customer_id'] != "") {
-        echo "<form action='".htmlspecialchars($_SERVER['PHP_SELF'])."' Method='POST'>
-        <input name='fill_address' type='checkbox' onchange='fillAddress(this.checked);'>
-        <label for='fill_address'>Use Saved Customer/Address Information on your Account</label>
-        </form>";
-        };
+        echo "
+        <div class='form-check'>
+            <form action='".htmlspecialchars($_SERVER['PHP_SELF'])."' Method='POST'>
+            <input class='form-check-input' name='fill_address' type='checkbox' onchange='fillAddress(this.checked);'>
+            <label class='form-check-label' for='fill_address'>Use Saved Customer/Address Information on your Account</label>
+            </form>
+        </div>";
+        } else {
+            echo "
+            <div class='alert alert-primary' role='alert'>
+                <strong>Login/Create an Account</strong> to Save your Customer/Address Information
+            </div>";
+        }
     ?>
-    <form class="form-inline" action="/action_page.php" id="checkout_form">
+    <form class="form-inline" action="" id="checkout_form">
 
     <!-- First Row -->
-    <h3>Customer Information</h3>
+    <h3 class='my-3'>Customer Information</h3>
     <div class="row w-100 mb-2">
         <!--first name field-->
         <div class="col-6 form-group">
@@ -104,7 +123,7 @@ include "external/popup_forms.php";
     </div>
 
     <!-- Third Row -->
-    <h3>Address Information</h3>
+    <h3 class='my-3'>Address Information</h3>
     <div class="row w-100 mb-2">
         <!-- Street Address field-->
         <div class="col-6 form-group">
@@ -144,6 +163,11 @@ include "external/popup_forms.php";
             <label class='col-4' for="country">Country:</label>
             <input type="text" class="form-control col-8" id="country" name="country">
         </div>
+    </div>
+
+    <!-- Sixth Row -->
+    <div class="row w-100">
+        <input class='w-75 mx-auto btn btn-primary mt-2' type='submit' value='Checkout'>
     </div>
 
     </form>

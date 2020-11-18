@@ -11,10 +11,6 @@
 session_start();
 //session_destroy();
 
-// Need to track and adjust tax rates elsewhere
-$tax_rate = 0.12;
-$shipping = 4.95;
-
 //handles database connection
 include "external/db_connect.php";
 

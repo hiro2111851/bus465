@@ -1,6 +1,6 @@
 function openCart() {
-    document.getElementById("myCart").style.width ="35%";
-    document.getElementById("main").style.marginRight = "35%";
+    document.getElementById("myCart").style.width ="40%";
+    document.getElementById("main").style.marginRight = "40%";
     document.getElementById("login_form").style.display = "none";
     document.getElementById("acc_create_form").style.display = "none";
 }
