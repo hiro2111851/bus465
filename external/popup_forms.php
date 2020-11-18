@@ -11,10 +11,10 @@ $tax_rate = 0.12;
 $shipping = 4.95;
 ?>
 <!-- Shopping Cart -->
-<div class="float-right sticky-top mt-3" id="myCart" style="<?php if(basename($_SERVER['PHP_SELF']) == "index.php") {echo "width: 0; overflow: hidden; height: 100%;";} else {echo "width: 40%; overflow: hidden; height: 100%;";} ?>">
+<div class="float-right sticky-top mt-3" id="myCart" style="<?php if(basename($_SERVER['PHP_SELF']) == "checkout.php") {echo "width: 40%; overflow: hidden; height: 100%;";} else {echo "width: 0; overflow: hidden; height: 100%;";} ?>">
     <div class="container" id="cartWrapper">
         <!--Back Button-->
-        <?php if(basename($_SERVER['PHP_SELF']) == "index.php") { echo "
+        <?php if(basename($_SERVER['PHP_SELF']) != "checkout.php") { echo "
             <button type='button' onclick='closeCart();'' class='btn btn-light btn-sm mt-3'>
             <svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-chevron-left' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
                 <path fill-rule='evenodd' d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/>
@@ -97,7 +97,7 @@ $shipping = 4.95;
         </div>
         
         <?php
-        if(basename($_SERVER['PHP_SELF']) == "index.php") {
+        if(basename($_SERVER['PHP_SELF']) != "checkout.php") {
             ?>
             <!--bottom buttons-->
             <div class="row my-3">

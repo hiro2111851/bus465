@@ -107,12 +107,12 @@ include "external/popup_forms.php";
         <!--first name field-->
         <div class="col-6 form-group">
             <label class='col-4' for="first_name">First Name:</label>
-            <input type="text" class="form-control col-8" id="first_name"  name="first_name">
+            <input type="text" class="form-control col-8" id="first_name"  name="first_name" required>
         </div>
         <!--last name field-->
         <div class="col-6 form-group">
             <label class='col-4' for="last_name">Last Name:</label>
-            <input type="text" class="form-control col-8" id="last_name" name="last_name">
+            <input type="text" class="form-control col-8" id="last_name" name="last_name" required>
         </div>
     </div>
 
@@ -121,12 +121,12 @@ include "external/popup_forms.php";
         <!-- Email field-->
         <div class="col-6 form-group">
             <label class='col-4' for="email">Email:</label>
-            <input type="text" class="form-control col-8" id="email" name="email">
+            <input type="text" class="form-control col-8" id="email" name="email" required>
         </div>
         <!-- Phone field-->
         <div class="col-6 form-group">
             <label class='col-4' for="phone">Phone:</label>
-            <input type="text" class="form-control col-8" id="phone" name="phone">
+            <input type="text" class="form-control col-8" id="phone" name="phone" required>
         </div>
     </div>
 
@@ -136,7 +136,7 @@ include "external/popup_forms.php";
         <!-- Street Address field-->
         <div class="col-6 form-group">
             <label class='col-4' for="street_1">Street Address:</label>
-            <input type="text" class="form-control col-8" id="street_1" name="street_1">
+            <input type="text" class="form-control col-8" id="street_1" name="street_1" required>
         </div>
         <!-- apt/unit field-->
         <div class="col-6 form-group">
@@ -150,12 +150,12 @@ include "external/popup_forms.php";
         <!-- City field-->
         <div class="col-6 form-group">
             <label class='col-4' for="city">City:</label>
-            <input type="text" class="form-control col-8" id="city" name="city">
+            <input type="text" class="form-control col-8" id="city" name="city" required>
         </div>
         <!-- Province field-->
         <div class="col-6 form-group">
             <label class='col-4' for="state">Province/State:</label>
-            <input type="text" class="form-control col-8" id="state" name="state">
+            <input type="text" class="form-control col-8" id="state" name="state" required>
         </div>
     </div>
 
@@ -164,12 +164,12 @@ include "external/popup_forms.php";
         <!-- Postal Code field-->
         <div class="col-6 form-group">
             <label class='col-4' for="zip_code">Postal Code:</label>
-            <input type="text" class="form-control col-8" id="zip_code" name="zip_code">
+            <input type="text" class="form-control col-8" id="zip_code" name="zip_code" required>
         </div>
         <!-- Country field-->
         <div class="col-6 form-group">
             <label class='col-4' for="country">Country:</label>
-            <input type="text" class="form-control col-8" id="country" name="country">
+            <input type="text" class="form-control col-8" id="country" name="country" required>
         </div>
     </div>
 

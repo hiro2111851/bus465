@@ -88,18 +88,23 @@ if(isset($_POST['submit_checkout'])) {
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <!-- CSS written by Abbey -->
+    <link rel="stylesheet" href="css/style.css">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <!--search icon from w3school-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
+    <!-- JS script for pop-up forms -->
+    <script src="js/popup.js"></script>
+
     <title>Butterbean Bakery Order Confirmation</title>
-  </head>
+</head>
+
 <style>
   #aboutus, #thecookies, #login {
   border-style: groove;
@@ -156,27 +161,15 @@ form.search button {
 }
 </style>
 
- <body>
+<?php
+// adds navbar
+include "external/navbar.php";
+// adds popup forms
+include "external/popup_forms.php";
+?>
 
-<!--header--><div class="row" height=300>
-  <div class="col-md-6"><h1 class="text-left" style="font-size:70px"><strong>Butterbean Bakery</strong></h1></div>
-  <div class="col-md-5"><form class="search" action="" style="margin:auto;max-width:600px"><!-- idk where the search button goes after you hit submit-->
-  <input type="text" placeholder="Search.." name="search2">
-  <button type="submit"><i class="fa fa-search"></i></button>
-</form></div>
-  <div class="col-md-1" align="center"><i class="fa fa-shopping-cart" style="font-size:42px"></i></div>
-  </div>
-
-<!--navigation bar--><div class="row">
-<div class="col-sm-4" id="aboutus" align=center>
-<a href="#aboutus" class="text-dark">About Us</a></div>
-<div class="col-sm-4" id="thecookies" align=center>
-<a href="#thecookies" class="text-dark">The Cookies</a></div>
-<div class="col-sm-4" id="login" align=center>
-<a href="#login" class="text-dark">Log In</a></div>
-</div><br><br><br>
+<body>
   
-
 <div class="container" align="center">
     <h1>
 Thank you for your order!
@@ -217,6 +210,9 @@ foreach ($_SESSION['shopping_cart'] as $cart_item) {?>
 <?php 
 }
 echo "<p align=right class='p-3'>Order Total: <strong>$".$total."</strong></p>";
+
+//clear cart
+unset($_SESSION['shopping_cart']);
 ?>
 </div>
 
