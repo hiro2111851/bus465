@@ -148,8 +148,5 @@ include "external/popup_forms.php";
 
 </div>
 
-<button type="button" id="btn1" disabled>Test</button>
-<button type="button" onclick="enableButton();">Enable Button Above</button>
-
 </body>
 </html>
