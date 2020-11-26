@@ -142,31 +142,54 @@ $shipping = 4.95;
     <div class="row">
         <div class="col-6">
             <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" name="first_name" class="form-control" required>
+            </div>
+            <div class="form-group">
                 <label for="email">Email</label>
                 <input type="text" name="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" name="dob" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="street_1">Street</label>
+                <input type="text" name="street_1" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" name="city" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="zip_code">Postal/ZIP Code</label>
+                <input type="text" name="zip_code" class="form-control" required>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" name="last_name" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" name="password" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="dob">Date of Birth</label>
-                <input type="date" name="dob" class="form-control" required>
-            </div>
-        </div>
-        <div class="col-6">
-
-            <div class="form-group">
-                <label for="first_name">First Name</label>
-                <input type="text" name="first_name" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="last_name">Last Name</label>
-                <input type="text" name="last_name" class="form-control" required>
-            </div>
-            <div class="form-group">
                 <label for="phone">Phone</label>
                 <input type="text" name="phone" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="street_2">Unit/Apt #</label>
+                <input type="text" name="street_2" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="state">Province/State</label>
+                <input type="text" name="state" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="country">Country</label>
+                <input type="text" name="country" class="form-control" required>
             </div>
         </div>
     </div>
