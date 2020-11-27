@@ -15,6 +15,28 @@ include "../external/db_connect.php";
 //adds a navbar
 include "admin_nav.php";
 
+//query to get data from the database
+$delivdate = '';
+$dollaramt = '';
+
+$sql = "SELECT b.delivery_date as Dates, SUM(oi.quantity*oi.price) as Dollars
+FROM batches b, batch_items bi, order_items oi 
+WHERE b.id = bi.batch_id AND bi.id = oi.batch_item_id
+GROUP BY b.delivery_date
+ORDER BY b.delivery_date DESC";
+
+$result = mysqli_query($conn, $sql);
+
+//loop through returned data
+while ($row = mysqli_fetch_array($result)) {
+
+    $delivdate = $delivdate . '"' . $row['Dates'].'",';
+    $dollaramt = $dollaramt . '"' . $row['Dollars'].'",';
+}
+
+$delivdate = trim($delivdate,",");
+$dollaramt = trim($dollaramt,",");
+
 ?>
 
 <!DOCTYPE html>
@@ -115,29 +137,14 @@ include "admin_nav.php";
         <script>
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
-            type: 'bar',
+            type: 'line',
             data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: [<?php echo $delivdate; ?>],
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
+                label: 'Dollars',
+                data: [<?php echo $dollaramt; ?>],
+                borderColor: ['rgba(255, 99, 132, 1)'],
+                borderWidth: 3
             }]
         },
             options: {
