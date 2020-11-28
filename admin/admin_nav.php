@@ -15,16 +15,16 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="./my_home.php">Home</a>
+        <a class="nav-link" href="my_home.php">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="./my_batches.php">Batches</a>
+        <a class="nav-link" href="my_batches.php">Batches</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="./my_payments.php">Payments</a>
+        <a class="nav-link" href="my_payments.php">Payments</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="./my_products.php">Products</a>
+        <a class="nav-link" href="my_products.php">Products</a>
       </li>
     </ul>
   </div>

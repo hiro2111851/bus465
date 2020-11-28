@@ -12,9 +12,6 @@ session_start();
 //handles database connection
 include "../external/db_connect.php";
 
-//adds a navbar
-include "admin_nav.php";
-
 //query to get data from the database
 $delivdate = '';
 $dollaramt = '';
@@ -37,6 +34,8 @@ while ($row = mysqli_fetch_array($result)) {
 $delivdate = trim($delivdate,",");
 $dollaramt = trim($dollaramt,",");
 
+//adds a navbar
+include "admin_nav.php";
 ?>
 
 <!DOCTYPE html>
@@ -101,7 +100,7 @@ $dollaramt = trim($dollaramt,",");
         .outer {
             display: table;
             position: absolute;
-            top: 0;
+            top: 10%;
             left: 0;
             height: 100%;
             width: 100%;

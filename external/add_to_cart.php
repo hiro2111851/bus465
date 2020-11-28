@@ -22,7 +22,7 @@ if(isset($_POST['add_to_cart'])){
 
         $cart_items = array_column($_SESSION['shopping_cart'], 'batch_item_id');
 
-        if(!in_array($_POST['batch'], $cart_items)) {// item doesn't exist in cart yet
+        if(!in_array($batch_item_id, $cart_items)) {// item doesn't exist in cart yet
             $_SESSION['shopping_cart'][$count] = array 
                 (
                     'batch_item_id' => $batch_item_id,

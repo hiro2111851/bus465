@@ -9,7 +9,7 @@
 
 <?php
 session_start();
-//session_destroy();
+// session_destroy();
 
 //handles database connection
 include "external/db_connect.php";
