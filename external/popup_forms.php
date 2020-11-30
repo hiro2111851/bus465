@@ -202,6 +202,21 @@ $shipping = 4.95;
     <div class="row">
         <div class="col-6">
             <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" name="city" class="form-control" required>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label for="state">Province/State</label>
+                <input type="text" name="state" class="form-control">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
                 <label for="zip_code">Postal/ZIP Code</label>
                 <input type="text" name="zip_code" class="form-control" required>
             </div>
