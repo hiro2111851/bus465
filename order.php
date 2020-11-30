@@ -10,11 +10,20 @@ session_start();
 
 include "external/db_connect.php";
 
-$sql = "SELECT status FROM orders WHERE id = ".$_GET['orderid'].";";
+$sql = "SELECT status FROM orders WHERE id = ".$_GET['orderid']." AND customer_id = ".$_SESSION['customer_id'].";";
 
 $result = mysqli_query($conn, $sql);
 
 $row = mysqli_fetch_row($result);
+
+//if the order does not exist or is not the logged in user's order
+if (!is_array($row)) {
+  echo "
+  <script type='text/javascript'>
+    alert('The order # entered does not exist or is not your past order');
+    window.location.href='index.php';
+    </script>";
+};
 
 $status = $row[0];
 ?>

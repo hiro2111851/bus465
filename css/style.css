@@ -50,3 +50,28 @@ html {
     overflow-x: hidden;
     height: 20em;
 }
+
+form.search input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+    }
+    
+form.search button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #DC747D;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+}
+
+form.search button:disabled {
+    background-color: gray;
+}
