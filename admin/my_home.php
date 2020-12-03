@@ -12,27 +12,8 @@ session_start();
 //handles database connection
 include "../external/db_connect.php";
 
-//query to get data from the database
-$delivdate = '';
-$dollaramt = '';
-
-$sql = "SELECT b.delivery_date as Dates, SUM(oi.quantity*oi.price) as Dollars
-FROM batches b, batch_items bi, order_items oi 
-WHERE b.id = bi.batch_id AND bi.id = oi.batch_item_id
-GROUP BY b.delivery_date
-ORDER BY b.delivery_date DESC";
-
-$result = mysqli_query($conn, $sql);
-
-//loop through returned data
-while ($row = mysqli_fetch_array($result)) {
-
-    $delivdate = $delivdate . '"' . $row['Dates'].'",';
-    $dollaramt = $dollaramt . '"' . $row['Dollars'].'",';
-}
-
-$delivdate = trim($delivdate,",");
-$dollaramt = trim($dollaramt,",");
+//handles queries
+include "admin_query.php";
 
 //adds a navbar
 include "admin_nav.php";
@@ -121,43 +102,113 @@ include "admin_nav.php";
 
     <!-- This will link the Bootstrap css file to this HTML page allowing us to use the Bootstrap classes to style our HTML components.  -->
     <link rel="stylesheet" href="../css/bootstrap.css">
-
+    
+    <!-- Chart.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js"></script>
 
     <title>Admin Homepage</title>
 </head>
 
 <body>
-<div class="outer">
-    <div class="middle">
-        <div class="inner">
-        <!-- Sample Chart -->
-        <canvas id="myChart" width="400" height="400"></canvas>
-        <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-            labels: [<?php echo $delivdate; ?>],
-            datasets: [{
-                label: 'Dollars',
-                data: [<?php echo $dollaramt; ?>],
-                borderColor: ['rgba(255, 99, 132, 1)'],
-                borderWidth: 3
-            }]
-        },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
-        </script>
+<div class="container-fluid">
+  <div class="row justify-content-start">
+    <div class="col-12 col-md-8">
+        <!-- Dollar Value of Orders -->
+        <div class="chart-container">
+            <canvas id="dollarorder" width="800" height="250"></canvas>
         </div>
     </div>
+    <div class="col-6 col-md-4">
+      One of two columns
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row justify-content-start">
+    <div class="col-12 col-md-8">
+        <!-- Quantity Sold in Last 30 Days of Orders -->
+        <div class="chart-container">
+            <canvas id="quantitysold" width="800" height="250"></canvas>
+        </div>
+    </div>
+    <div class="col-6 col-md-4">
+      One of two columns
+    </div>
+  </div>
 </div>
 </body>
+
+<script>
+
+window.onload = function() {
+// Dollar Value of Orders
+var ctx1 = document.getElementById("dollarorder").getContext('2d');
+var dollarorder = new Chart(ctx1, {
+    type: 'line',
+    data: {
+    labels: [<?php echo $delivdate; ?>],
+    datasets: [{
+        label: 'Dollars',
+        data: [<?php echo $dollaramt; ?>],
+        borderColor: ['rgba(51, 153, 255, 1)'],
+        borderWidth: 3
+        }]
+    },
+    options: {
+        title: {
+            display:true,
+            text:'Dollar Value of Orders'
+        },
+        responsive: true,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+// Quantity Sold 
+var ctx2 = document.getElementById("quantitysold").getContext('2d');
+var quantitysold = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+	    labels: [<?php echo $prodname; ?>],
+	    datasets: [{
+    		label: 'Maximum',
+	    	backgroundColor: "#3399FF",
+		    stack: 'Stack 0',
+		    data: [<?php echo $maxquantity; ?>]
+	    }, {
+    		label: 'Sold',
+	    	backgroundColor: "#868686",
+		    stack: 'Stack 1',
+    		data: [<?php echo $soldquantity; ?>]
+	    }]
+    },
+    options: {
+        title: {
+            display: true,
+            text: 'Quantity Sold (Last 30 Days)'
+        },
+        tooltips: {
+			mode: 'index',
+			intersect: false
+		},
+        responsive: true,
+        scales: {
+            xAxes: [{
+                stacked: true,
+            }],
+            yAxes: [{
+                stacked: true
+            }]
+        }
+    }
+});
+
+}
+
+</script>
