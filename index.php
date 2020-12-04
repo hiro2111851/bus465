@@ -40,8 +40,8 @@ include "external/logout.php";
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-    <!-- JS script for pop-up forms -->
-    <script src="js/popup.js"></script>
+    <!-- JS script -->
+    <script src="js/main.js"></script>
 
     <title>Butterbean Bakery</title>
   </head>
