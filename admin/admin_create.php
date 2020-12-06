@@ -18,6 +18,8 @@ include "../external/db_connect.php";
 // check account creation form submission
 include "../external/create_admin.php";
 
+//adds a navbar
+include "admin_nav.php";
 ?>
 
 <!DOCTYPE html>

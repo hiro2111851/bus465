@@ -26,6 +26,9 @@
       <li class="nav-item">
         <a class="nav-link" href="my_products.php">Products</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="admin_create.php">Create Admin</a>
+      </li>
     </ul>
   </div>
 </nav>
