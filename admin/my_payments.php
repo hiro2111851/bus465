@@ -18,6 +18,7 @@ include "admin_nav.php";
 // Form handler
     //if the e-transfer form submit button is pressed
     if(isset($_POST['submit_payment'])) {
+        // check order total
         $sql = "
             SELECT SUM(quantity*price)
             FROM order_items
@@ -27,6 +28,7 @@ include "admin_nav.php";
         $row = mysqli_fetch_row($result);
         $order_amount = $row[0];
 
+        //if order total = e-transfer amount submitted
         if($order_amount == $_POST['amount']) {
             //create payment record 
             $sql = "
@@ -38,6 +40,7 @@ include "admin_nav.php";
             //retrieve the payment id just created
             $payment = mysqli_insert_id($conn);
 
+            // mark order as paid
             $sql = "
             UPDATE orders
             SET status = 'Payment Received'
