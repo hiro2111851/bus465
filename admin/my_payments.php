@@ -14,6 +14,42 @@ include "../external/db_connect.php";
 
 //adds a navbar
 include "admin_nav.php";
+
+// Form handler
+    //if the e-transfer form submit button is pressed
+    if(isset($_POST['submit_payment'])) {
+        $sql = "
+            SELECT SUM(quantity*price)
+            FROM order_items
+            WHERE order_id = ".$_POST['order'].";";
+
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_row($result);
+        $order_amount = $row[0];
+
+        if($order_amount == $_POST['amount']) {
+            //create payment record 
+            $sql = "
+                INSERT INTO payments (order_id, sender_email, amount, date) 
+                VALUES ('".$_POST['order']."', '".$_POST['sender_email']."', '".$_POST['amount']."', NOW());";
+
+            mysqli_query($conn, $sql);
+            
+            //retrieve the payment id just created
+            $payment = mysqli_insert_id($conn);
+
+            $sql = "
+            UPDATE orders
+            SET status = 'Payment Received'
+            WHERE id = ".$_POST['order'].";";
+
+            mysqli_query($conn, $sql);
+
+            echo "<p>Payment Record ID: ".$payment." created. Order ID: ".$_POST['order']." marked as Payment Received </p>";
+        } else {
+            echo "<p>Payment amount does not match order amount</p>";
+        };
+    };
 ?>
 
 <!DOCTYPE html>
@@ -72,6 +108,36 @@ include "admin_nav.php";
     </tbody>
 </table>
 
+<h3>E-Transfer</h3>
+
+<!-- Form sends it to itself -->
+<form action='<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>' METHOD='POST'>
+    <label for='order'>Select Order</label>
+    <select name='order'>
+        <?php 
+        $sql = "SELECT o.id, CONCAT(c.first_name, ' ', c.last_name) as customer_name
+                FROM orders o
+                JOIN customers c
+                ON o.customer_id = c.id
+                WHERE o.status = 'Pending Payment';";
+
+        $result = mysqli_query($conn, $sql);
+
+        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){ 
+            echo "<option value='".$row['id']."'>Order ID:".$row['id']." for ".$row['customer_name']."</option>";
+        };
+        ?>
+        
+    </select>
+
+    <label for='amount'>Amount</label>
+    <input type='number' step=".01" name='amount' required>
+
+    <label for='amount'>Sender Email</label>
+    <input type='text' name='sender_email' required>
+
+    <button type='submit' name='submit_payment'>Mark Payment</button>
+</form>
 </body>
 
 </html>
