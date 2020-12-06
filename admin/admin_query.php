@@ -1,3 +1,11 @@
+<!-- 
+    Page Name: Admin Queries
+
+    Page Description: Queries for admin home dashboard
+
+    Created By: Oliver
+-->
+
 <?php
 //handles database connection
 include "../external/db_connect.php";
@@ -26,6 +34,7 @@ while ($row = mysqli_fetch_array($result1)) {
 $delivdate = trim($delivdate,",");
 $dollaramt = trim($dollaramt,",");
 
+
 //query for Quantity Fulfilled (Last 30 Days)
 $prodname = '';
 $maxquantity = '';
@@ -38,7 +47,7 @@ AND bi.batch_id = b.id
 AND b.delivery_date >= DATE_ADD(NOW(), INTERVAL -30 DAY) 
 AND b.delivery_date <= NOW()
 GROUP BY p.name
-ORDER BY Maximum DESC";
+ORDER BY Maximum, Products, Sold DESC";
 
 $result2 = mysqli_query($conn, $sql2);
 
@@ -54,5 +63,15 @@ while ($row = mysqli_fetch_array($result2)) {
 $prodname = trim($prodname,",");
 $maxquantity = trim($maxquantity,",");
 $soldquantity = trim($soldquantity,",");
+
+
+//query for Current Batches filled
+$sql3 = "SELECT b.id as 'Batch Number', p.name as 'Product', bi.max_quantity as 'Max. Quantity', bi.quantity_sold as 'Sold'
+FROM batch_items bi, batches b, products p 
+WHERE bi.batch_id = b.id AND bi.product_id = p.name
+AND b.delivery_date >= NOW()
+ORDER BY b.delivery_date DESC";
+
+$result3 = mysqli_query($conn, $sql3);
 ?>
 

@@ -33,7 +33,7 @@ if(isset($_POST['submit_login'])) {
             $_SESSION['admin_name'] = $row['name'];
             echo "<div class='alert alert-success' role='alert'>Login Successful. Redirecting to admin main page in 5 seconds...</div>";
             // meta redirect (apparently should use a 301 redirect, may change later)
-            echo "<meta http-equiv='refresh' content='5;URL=/bus465/admin/my_batches.php'>";
+            echo "<meta http-equiv='refresh' content='5;URL=/bus465/admin/my_home.php'>";
         } else {
             $_SESSION['admin_id'] = "";
             $_SESSION['admin_name'] = "";

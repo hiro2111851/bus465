@@ -9,8 +9,8 @@
 <?php
 session_start();
 
-// check login form submission
-//include "/adminlogin.php";
+// check login
+include "./admin_check.php";
 
 //handles database connection
 include "../external/db_connect.php";

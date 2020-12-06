@@ -9,6 +9,9 @@
 <?php
 session_start();
 
+// check login
+include "./admin_check.php";
+
 //handles database connection
 include "../external/db_connect.php";
 
@@ -119,7 +122,30 @@ include "admin_nav.php";
         </div>
     </div>
     <div class="col-6 col-md-4">
-      One of two columns
+      <h4>Current Batches Status</h4>
+      <table class="table table-stripted">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Batch Number</th>
+            <th scope="col">Product</th>
+            <th scope="col">Max. Quantity</th>
+            <th scope="col">Sold</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php 
+            while ($row = mysqli_fetch_array($result3, MYSQLI_ASSOC)){
+              echo "
+                <tr>
+                  <td>".$row['Batch Number']."</td>
+                  <td>".$row['Product']."</td>
+                  <td>".$row['Max. Quantity']."</td>
+                  <td>".$row['Sold']."</td>
+                </tr>";
+            };
+          ?>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

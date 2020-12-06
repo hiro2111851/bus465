@@ -126,8 +126,6 @@ include "../admin/admin_login.php";
             </tr>
             <tr>
               <td colspan='1' align='center'><input type='submit' name='submit_login' class="btn btn-primary" value='Login'/></td>
-              <!--link reference to reset password-->
-              <td><a href="#passwordreset">Forgot Password?</a></td>
             </tr>
           </table>
         </form>
