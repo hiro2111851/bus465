@@ -76,5 +76,15 @@ AND NOW() between b.start_date AND b.end_date
 ORDER BY b.delivery_date DESC";
 
 $result3 = mysqli_query($conn, $sql3);
+
+//query for Top Sellers
+$sql4 = "SELECT p.name as Product, CONCAT(FORMAT(AVG(bi.quantity_sold/bi.max_quantity)*100, 2), '%') as 'Percent', SUM(bi.quantity_sold) as 'Quantity'
+FROM batch_items bi
+INNER JOIN products p
+ON bi.product_id = p.id
+GROUP BY bi.product_id
+ORDER BY AVG(bi.quantity_sold/bi.max_quantity) DESC";
+
+$result4 = mysqli_query($conn, $sql4)
 ?>
 

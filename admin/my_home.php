@@ -122,7 +122,8 @@ include "admin_nav.php";
         </div>
     </div>
     <div class="col-6 col-md-4">
-      <h4>Current Batches Status</h4>
+      <!-- Status of Current Batches-->
+      <h4>Status of Current Batches</h4>
       <table class="table table-stripted">
         <thead class="thead-dark">
           <tr>
@@ -158,7 +159,29 @@ include "admin_nav.php";
         </div>
     </div>
     <div class="col-6 col-md-4">
-      One of two columns
+      <!-- Top Selling -->
+      <h4>Top Selling Products</h4>
+      <table class="table table-stripted">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Percent</th>
+            <th scope="col">Total Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php 
+            while ($row = mysqli_fetch_array($result4, MYSQLI_ASSOC)){
+              echo "
+                <tr>
+                  <td>".$row['Product']."</td>
+                  <td>".$row['Percent']."</td>
+                  <td>".$row['Quantity']."</td>
+                </tr>";
+            };
+          ?>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
