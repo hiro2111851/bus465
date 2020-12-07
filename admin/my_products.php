@@ -36,7 +36,7 @@ include "admin_nav.php";
 
 <body>
 <div class="container">
-
+<h1 class="my-3"> My Products </h1>
 <!-- Products table -->
 <table class="table">
     <thead>
@@ -102,7 +102,7 @@ include "admin_nav.php";
         <textarea name="description" rows="5" class="form-control" required></textarea>
     </div>
 
-<button type="submit" name="submit_product" class="btn btn-primary">Add Batch</button>
+<button type="submit" name="submit_product" class="btn btn-primary">Add Product</button>
 
 </form>
 </div>

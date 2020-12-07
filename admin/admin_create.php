@@ -84,7 +84,7 @@ include "admin_nav.php";
         .outer {
             display: table;
             position: absolute;
-            top: 0;
+            top: 5%;
             left: 0;
             height: 100%;
             width: 100%;

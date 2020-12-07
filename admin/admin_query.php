@@ -14,12 +14,15 @@ include "../external/db_connect.php";
 $delivdate = '';
 $dollaramt = '';
 
-$sql1 = "SELECT b.delivery_date as Dates, SUM(oi.quantity*oi.price) as Dollars
-FROM batches b, batch_items bi, order_items oi 
-WHERE b.id = bi.batch_id AND bi.id = oi.batch_item_id
+$sql1 = "
+SELECT b.delivery_date as Dates, SUM(oi.quantity*oi.price) as Dollars
+FROM batch_items bi
+INNER JOIN batches b
+ON b.id = bi.batch_id
+INNER JOIN order_items oi
+ON bi.id = oi.batch_item_id
 GROUP BY b.delivery_date
-ORDER BY b.delivery_date ASC
-LIMIT 10";
+ORDER BY b.delivery_date ASC;";
 
 $result1 = mysqli_query($conn, $sql1);
 
@@ -44,8 +47,8 @@ $sql2 = "SELECT p.name as Products, SUM(bi.max_quantity) as Maximum, SUM(bi.quan
 FROM batch_items bi, products p, batches b
 WHERE bi.product_id = p.id 
 AND bi.batch_id = b.id 
-AND b.delivery_date >= DATE_ADD(NOW(), INTERVAL -30 DAY) 
-AND b.delivery_date <= NOW()
+AND b.start_date >= DATE_ADD(NOW(), INTERVAL -30 DAY) 
+AND b.start_date <= NOW()
 GROUP BY p.name
 ORDER BY Maximum, Products, Sold DESC";
 
@@ -68,8 +71,8 @@ $soldquantity = trim($soldquantity,",");
 //query for Current Batches filled
 $sql3 = "SELECT b.id as 'Batch Number', p.name as 'Product', bi.max_quantity as 'Max. Quantity', bi.quantity_sold as 'Sold'
 FROM batch_items bi, batches b, products p 
-WHERE bi.batch_id = b.id AND bi.product_id = p.name
-AND b.delivery_date >= NOW()
+WHERE bi.batch_id = b.id AND bi.product_id = p.id
+AND NOW() between b.start_date AND b.end_date
 ORDER BY b.delivery_date DESC";
 
 $result3 = mysqli_query($conn, $sql3);
