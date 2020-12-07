@@ -111,9 +111,9 @@ include "admin_nav.php";
 
 <body>
 
-<div class="outer">
-  <div class="middle">
-    <div class="inner">
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-4">
       <!-- Account Creation Form -->
       <div id="acc_create_form" class="px-5 py-3">
         <h3>Create an Admin Account</h3>
