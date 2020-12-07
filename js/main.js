@@ -38,18 +38,20 @@ function batchQuantity(str) {
         }
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
+                //display quantity available
                 document.getElementById(qty_id).innerHTML = this.responseText;
+                //create Add to Cart Button
                 var cartButton = document.createElement('button');
                 cartButton.innerHTML = "Add to Cart";
                 cartButton.setAttribute("name", "add_to_cart");
                 cartButton.setAttribute("type", "submit");
                 document.getElementById(qty_id).parentElement.after(cartButton);
+                //remove default option
+                var defop = str.split('_')[0]+"_default";
+                document.getElementById(defop).style.display = 'none';
             }
         };
         xmlhttp.open("GET", "external/batch_quantity.php?batch="+batch, true);
         xmlhttp.send();
     }
-    //remove default option
-    var defop = str.split('_')[0]+"_default";
-    document.getElementById(defop).style.display = 'none';
 }
