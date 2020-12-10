@@ -78,7 +78,7 @@ include "admin_nav.php";
         <tr>
             <th scope="col">Name</th>
             <th scope="col">Order ID</th>
-            <th scope="col">Delivery Date</th>
+            <th scope="col">Order Date</th>
             <th scope="col">Amount</th>
             <th scope="col">Status</th>
         </tr>
@@ -95,7 +95,7 @@ include "admin_nav.php";
         INNER JOIN customers c
         ON o.customer_id = c.id
         GROUP BY o.id
-        ORDER BY o.date;
+        ORDER BY o.status DESC, o.date;
         ";
 
     $result = mysqli_query($conn, $sql);

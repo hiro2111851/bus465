@@ -23,7 +23,7 @@ if(isset($_POST['submit_login'])) {
         if (password_verify($_POST['password'], $row['password'])) {
             $_SESSION['customer_id'] = $row['id'];
             $_SESSION['customer_name'] = $row['name'];
-            echo "<div class='alert alert-success' role='alert'>Login Successful. </div>";
+            echo "<div class='alert alert-success' role='alert'>Login Successful. Welcome ".$row['name']."! </div>";
         } else {
             $_SESSION['customer_id'] = "";
             $_SESSION['customer_name'] = "";

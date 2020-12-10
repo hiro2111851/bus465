@@ -28,6 +28,7 @@ function closeForm() {
 function batchQuantity(str) {
     // AJAX to retrieve quantity available in batch
     var qty_id = "qty_"+str.split('_')[0];
+    var btn_id = "btn_"+str.split('_')[0];
     var batch = str.split('_')[1];
     if (str == "") {
     } else {
@@ -41,6 +42,7 @@ function batchQuantity(str) {
                 //display quantity available
                 document.getElementById(qty_id).innerHTML = this.responseText;
                 //create Add to Cart Button
+<<<<<<< Updated upstream
                 var cartButton = document.createElement('button');
                 cartButton.innerHTML = "Add to Cart";
                 cartButton.setAttribute("name", "add_to_cart");
@@ -49,6 +51,21 @@ function batchQuantity(str) {
                 //remove default option
                 var defop = str.split('_')[0]+"_default";
                 document.getElementById(defop).style.display = 'none';
+=======
+                if (document.getElementById(btn_id)) {
+                    //nothing
+                } else {
+                    var cartButton = document.createElement('button');
+                    cartButton.innerHTML = "Add to Cart";
+                    cartButton.setAttribute("name", "add_to_cart");
+                    cartButton.setAttribute("type", "submit");
+                    cartButton.setAttribute("id", btn_id);
+                    document.getElementById(qty_id).parentElement.after(cartButton);
+                    //remove default option
+                    var defop = str.split('_')[0]+"_default";
+                    document.getElementById(defop).style.display = 'none';
+                }
+>>>>>>> Stashed changes
             }
         };
         xmlhttp.open("GET", "external/batch_quantity.php?batch="+batch, true);

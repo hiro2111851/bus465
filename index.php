@@ -75,8 +75,8 @@ include "external/popup_forms.php";
 
         echo "
             <div class='col-6 px-5'>
-            <div class='container' align='center'>
-                <img class='w-50' src='".$row['img_link']."' alt='Chocolate Chip Cookies'>
+            <div class='container mb-3' align='center'>
+                <img class='w-50' src='".$row['img_link']."'>
                 <h5 class='my-3 product-heading'>".$row['name']." </h5>
                 <p>".$row['description']." </p>
                 <form action='".htmlspecialchars($_SERVER['PHP_SELF'])."' method='POST'>

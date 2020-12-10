@@ -156,6 +156,7 @@ $subtotal += $row['price']*$row['quantity'];
        </p>    
     </div>
   </div>
+<!--
   <div class="row">
     <div class="col" style="text-align: left">
        <label>
@@ -192,6 +193,7 @@ $subtotal += $row['price']*$row['quantity'];
        </p>    
     </div>
   </div>
+-->
 </div><br><br>
 
 </div>

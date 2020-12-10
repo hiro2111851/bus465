@@ -7,8 +7,8 @@
 -->
 <?php
 // Need to track and adjust tax rates elsewhere
-$tax_rate = 0.12;
-$shipping = 4.95;
+//$tax_rate = 0.12;
+//$shipping = 4.95;
 ?>
 <!-- Shopping Cart -->
 <div class="float-right sticky-top mt-3" id="myCart" style="<?php if(basename($_SERVER['PHP_SELF']) == "checkout.php") {echo "width: 40%; overflow: hidden; height: 100%;";} else {echo "width: 0; overflow: hidden; height: 100%;";} ?>">
@@ -70,6 +70,7 @@ $shipping = 4.95;
                     <p><?php echo "$".$subtotal;?></p>    
                 </div>
             </div>
+<!--
             <div class="row">
                 <div class="col" style="text-align: left">
                     <label>Est. Shipping:</label>
@@ -94,6 +95,7 @@ $shipping = 4.95;
                     <p><?php echo "$".round(($subtotal+$shipping)*(1+$tax_rate), 2);?></p>    
                 </div>
             </div>
+-->
         </div>
         
         <?php
@@ -173,7 +175,7 @@ $shipping = 4.95;
         <div class="col-6">
             <div class="form-group">
                 <label for="phone">Phone</label>
-                <input type="text" name="phone" class="form-control" required>
+                <input type="text" name="phone" class="form-control" placeholder="7781234567" required>
             </div>
         </div>
         <div class="col-6">
@@ -218,7 +220,7 @@ $shipping = 4.95;
         <div class="col-6">
             <div class="form-group">
                 <label for="zip_code">Postal/ZIP Code</label>
-                <input type="text" name="zip_code" class="form-control" required>
+                <input type="text" name="zip_code" class="form-control" placeholder="V5A1S6" required>
             </div>
         </div>
         <div class="col-6">
