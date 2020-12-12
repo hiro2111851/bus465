@@ -7,19 +7,18 @@
 -->
 <?php
 if(isset($_POST['remove_product'])) {
-    // remove image
-    if($_POST['img_link'] != 'img/placeholder.png') {
-        unlink("../".$_POST['img_link']);
-    }
+    $stmt = $conn->prepare("DELETE FROM products WHERE id = ?;");
+    $stmt->bind_param("i", $_POST['product_id']);
 
-    $sql = "
-    DELETE FROM products
-    WHERE id = '".$_POST['product_id']."';";
-
-    if (!$conn->query($sql)) {
-        echo "MySQL Error:". $conn -> error."<br>";
+    if (!$stmt->execute()) {
+        echo "MySQL Error:". $stmt -> error."<br>";
     } else {
         echo "<div class='alert alert-warning' role='alert'>Product Name: ".$_POST['name']." successfully deleted.</div>";
+
+        // remove image
+        if($_POST['img_link'] != 'img/placeholder.png') {
+            unlink("../".$_POST['img_link']);
+        }
     };
 }
 ?>

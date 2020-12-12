@@ -3,15 +3,13 @@
 
     Page Description: php file that handles adding product and product image upload
 
+    SQL Injection Prevention: Done
+
     Created By:Hiro
 -->
+
 <?php
 if(isset($_POST['submit_product'])){
-    //retrieve form content
-    $name = $_POST['name'];
-    $price = $_POST['price'];
-    $description = $_POST['description'];
-
     //retrieve image
     $image = $_FILES['image'];
     $fileName = $_FILES['image']['name'];
@@ -23,19 +21,18 @@ if(isset($_POST['submit_product'])){
     echo $_FILES['image']['name'];
 
     // Create record on products table
-    $sql = "
-        INSERT INTO products (name, price, description, active)
-        VALUES (
-            '".$name."',
-             ".$price.", 
-             '".$description."', 1);";
-    
-    if ($conn->query($sql) === TRUE) {
-        $last_id = $conn->insert_id;
+    $stmt = $conn->prepare("INSERT INTO products (name, price, description, active) VALUES (?, ?, ?, 1);");
+    // bind parameter
+    $stmt->bind_param("sds", $_POST['name'], $_POST['price'], $_POST['description']);
+    // check execution
+    if ($stmt->execute()) {
+        $last_id = $stmt->insert_id;
         echo "<div class='alert alert-success' role='alert'> New product: ".$name." added successfully. Product ID is: ".$last_id."</div>";
     } else {
-       die("<div class='alert alert-danger' role='alert'> Error: ".$sql."<br>". $conn->error."</div>");
+       die("<div class='alert alert-danger' role='alert'> Error: ".$sql."<br>". $stmt->error."</div>");
     };
+    //close prepared statement
+    $stmt->close();
 
     if(file_exists($_FILES['image']['tmp_name'])) {
         //handle file extention check
@@ -50,18 +47,18 @@ if(isset($_POST['submit_product'])){
             if($fileError === 0){
                 if($fileSize < 5000000){
                     move_uploaded_file($fileTmpName, "../".$fileDestination);
+                    //prepare
+                    $stmt = $conn->prepare("UPDATE products SET img_link = ? WHERE id = ?;");
+                    //bind
+                    $stmt->bind_param("ss", $fileDestination, $last_id);
 
-                    $query = "
-                        UPDATE products
-                        SET img_link = '".$fileDestination."'
-                        WHERE id = ".$last_id.";
-                    ";
-
-                    if ($conn->query($query) === TRUE) {
+                    if ($stmt->execute()) {
                         echo "<div class='alert alert-success' role='alert'>Product image successfully uploaded.</div>";
                     } else {
-                       die("<div class='alert alert-danger' role='alert'> Error: ".$sql."<br>". $conn->error."</div>");
+                       die("<div class='alert alert-danger' role='alert'> SQL Error: <br>". $stmt->error."</div>");
                     }
+                    //close prepared statement
+                    $stmt->close();
                 } else {
                     echo "<div class='alert alert-danger' role='alert'> Product image must be smaller than 5 MB</div>";
                 }
@@ -74,4 +71,6 @@ if(isset($_POST['submit_product'])){
     } else {
         echo "<div class='alert alert-warning' role='alert'> Product image was not provided. Placeholder image will be used. </div>";
     }
-};
+
+}; ?>
+

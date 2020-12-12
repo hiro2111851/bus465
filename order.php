@@ -10,22 +10,30 @@ session_start();
 
 include "external/db_connect.php";
 
-$sql = "SELECT status FROM orders WHERE id = ".$_GET['orderid']." AND customer_id = ".$_SESSION['customer_id'].";";
+$stmt = $conn->prepare(
+  "SELECT status FROM orders WHERE id = ? AND customer_id = ?;"
+);
 
-$result = mysqli_query($conn, $sql);
+$stmt->bind_param("ii", $_GET['orderid'], $_SESSION['customer_id']);
 
-$row = mysqli_fetch_row($result);
+$stmt->execute();
+$stmt->store_result();
+$stmt->bind_result($s);
 
 //if the order does not exist or is not the logged in user's order
-if (!is_array($row)) {
+if (!$stmt->num_rows > 0) {
   echo "
   <script type='text/javascript'>
     alert('The order # entered does not exist or is not your past order');
     window.location.href='index.php';
     </script>";
+} else {
+  while ($stmt->fetch()) {
+    $status = $s;
+  }
 };
 
-$status = $row[0];
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +51,7 @@ $status = $row[0];
 
 
     <!-- JS script for pop-up forms -->
-    <script src="js/popup.js"></script>
+    <script src="js/main.js"></script>
 
     <title>Order #<?php echo $_GET['orderid'];?> Detail</title>
 </head>
@@ -90,31 +98,36 @@ include "external/popup_forms.php";
 
 <?php
 //retrieve order detail
-$sql = "SELECT p.name, DATE_FORMAT(b.delivery_date, '%W, %M %D') as batch, p.img_link, oi.price, oi.quantity
-        FROM batch_items bi
-        	INNER JOIN batches b ON bi.batch_id = b.id
-        	INNER JOIN products p ON bi.product_id = p.id
-            INNER JOIN order_items oi ON bi.id = oi.batch_item_id
-        WHERE oi.order_id = ".$_GET['orderid'].";";
+$stmt = $conn->prepare(
+  "SELECT p.name, DATE_FORMAT(b.delivery_date, '%W, %M %D') as batch, p.img_link, oi.price, oi.quantity
+  FROM batch_items bi
+    INNER JOIN batches b ON bi.batch_id = b.id
+    INNER JOIN products p ON bi.product_id = p.id
+      INNER JOIN order_items oi ON bi.id = oi.batch_item_id
+  WHERE oi.order_id = ?;"
+);
 
-$result = mysqli_query($conn, $sql);
+$stmt->bind_param("i", $_GET['orderid']);
+$stmt->execute();
+$stmt->store_result();
+$stmt->bind_result($name, $batch, $img_link, $price, $quantity);
 
 $subtotal = 0;
 
-while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {?>    
+while ($stmt->fetch()) {?>    
 <div class="container-fluid my-3">
     <div class="row">
         <div class="col-4">
-            <img class="img-responsive" src="<?php echo $row['img_link'];?>" width="170">    
+            <img class="img-responsive" src="<?php echo $img_link;?>" width="170">    
         </div>
         <div class="col-8">
-            <h3 style="font-family: Vivaldi; font-weight: bold;"><?php echo $row['name'];?></h3>
+            <h3 style="font-family: Vivaldi; font-weight: bold;"><?php echo $name;?></h3>
             <div class="row">
                 <div class="col-6">
                     <p style="text-align: left">Price:</p>
                 </div>
                 <div class="col-6">
-                    <p style="text-align: right">$<?php echo $row['price'];?></p>
+                    <p style="text-align: right">$<?php echo $price;?></p>
                 </div>
             </div>
             <div class="row">
@@ -122,7 +135,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {?>
                     <p style="text-align: left">Quantity:</p>
                 </div>
                 <div class="col-6">
-                    <p style="text-align: right"><?php echo $row['quantity'];?></p>
+                    <p style="text-align: right"><?php echo $quantity;?></p>
                 </div>
             </div>
             <div class="row">
@@ -130,15 +143,17 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {?>
                     <p style="text-align: left">Batch:</p>
                 </div>
                 <div class="col-6">
-                    <p style="text-align: right"><?php echo $row['batch'];?></p>
+                    <p style="text-align: right"><?php echo $batch;?></p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <?php 
-$subtotal += $row['price']*$row['quantity'];
+$subtotal += $price*$quantity;
 }; 
+
+$stmt->close();
 ?>
 
 <h3 style="font-family: Vivaldi; font-weight: bold;">Order Summary</h3>

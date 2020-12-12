@@ -38,7 +38,7 @@ include "external/logout.php";
 
 
     <!-- JS script for pop-up forms -->
-    <script src="js/popup.js"></script>
+    <script src="js/main.js"></script>
     <!-- JS script for checkout -->
     <script src="js/checkout.js"></script>
 

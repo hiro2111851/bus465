@@ -3,7 +3,8 @@
 
     Page Description: The Mainpage of the website; has the products, 
 
-    Created By: Abbey
+    Designed By: Abbey
+    Created By: Hiro
 -->
 <!doctype html>
 
@@ -83,8 +84,6 @@ include "external/popup_forms.php";
                     <input type='hidden' name='product_name' value='".$row['name']."'>
                     <input type='hidden' name='price' value='".$row['price']."'>
                     <input type='hidden' name='img_link' value='".$row['img_link']."'>
-                    <label for='quantity'>Quantity:</label>
-                    <input type='number' min='1' max='10' name='quantity' required>
             ";
 
         // Generate dropdown menu for available batch

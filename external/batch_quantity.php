@@ -1,11 +1,3 @@
-<!-- 
-    Page Name: PHP file for Batch Quantity Query
-
-    Page Description:
-
-    Created By: Hiro
--->
-
 <?php 
 // handles database connection
 include "db_connect.php";
@@ -13,13 +5,15 @@ include "db_connect.php";
 // retrieve batch and product ID via GET 
 $batch = $_GET['batch'];
 
-$sql = "SELECT max_quantity-quantity_sold as qty 
-        FROM batch_items 
-        WHERE id = ".$batch;
+$stmt = $conn->prepare("SELECT max_quantity-quantity_sold as qty FROM batch_items WHERE id = ?");
+$stmt->bind_param("i", $_GET['batch']);
+$stmt->execute();
+$stmt->store_result();
+$stmt->bind_result($quantity);
 
-$result = mysqli_query($conn, $sql);
+while ($stmt->fetch()) {
+    echo $quantity;
+}
 
-$row = mysqli_fetch_row($result);
-
-echo $row[0];
+$stmt->close();
 

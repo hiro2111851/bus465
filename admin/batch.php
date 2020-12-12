@@ -48,25 +48,30 @@ include "../external/add_batch_item.php";
 
 <!-- Loop through sql query to generate table content (batches) -->
 <?php
-$sql = "
-    SELECT p.name, b.max_quantity, b.quantity_sold
+$stmt = $conn->prepare(
+    "SELECT p.name, b.max_quantity, b.quantity_sold
     FROM batch_items b
     INNER JOIN products p
     ON b.product_id = p.id
-    WHERE b.batch_id = ".$batch_id.
-    " ORDER BY b.max_quantity DESC;
-    ";
+    WHERE b.batch_id = ?
+    ORDER BY b.max_quantity DESC;"
+);
 
-$result = mysqli_query($conn, $sql);
+$stmt->bind_param("i", $batch_id);
+$stmt->execute();
+$stmt->store_result();
+$stmt->bind_result($name ,$max_quantity, $quantity_sold);
 
-while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+while ($stmt->fetch()){
     echo 
         "<tr scope='row'> 
-            <td>".$row['name']."</td>
-            <td>".$row['max_quantity']."</td>
-            <td>".$row['quantity_sold']."</td>
+            <td>".$name."</td>
+            <td>".$max_quantity."</td>
+            <td>".$quantity_sold."</td>
         </tr>";
 };
+
+$stmt->close();
 ?>
 
     </tbody>

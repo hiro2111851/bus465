@@ -15,22 +15,30 @@ if(isset($_POST['submit_checkout'])) {
     //check if guest checkout
     if($_POST['guest'] == 1) {
         //create guest customer record
-        $sql = "INSERT INTO customers (guest, email, first_name, last_name, phone, street_1, street_2, city, state, zip_code, country)
-                VALUES ('1', '"
-                .$_POST['email']."', '"
-                .$_POST['first_name']."', '"
-                .$_POST['last_name']."', '"
-                .$_POST['phone']."', '"
-                .$_POST['street_1']."', '"
-                .$_POST['street_2']."', '"
-                .$_POST['city']."', '"
-                .$_POST['state']."', '"
-                .$_POST['zip_code']."', '"
-                .$_POST['country']."');";
-        
-        mysqli_query($conn, $sql);
+        $stmt = $conn->prepare(
+            "INSERT INTO customers (guest, email, first_name, last_name, phone, street_1, street_2, city, state, zip_code, country)
+            VALUES ('1', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+        );
 
-        $customer = mysqli_insert_id($conn);        
+        $stmt->bind_param(
+            "ssssssssss"
+            ,$_POST['email']
+            ,$_POST['first_name']
+            ,$_POST['last_name']
+            ,$_POST['phone']
+            ,$_POST['street_1']
+            ,$_POST['street_2']
+            ,$_POST['city']
+            ,$_POST['state']
+            ,$_POST['zip_code']
+            ,$_POST['country']
+        );
+
+        $stmt->execute();
+
+        $customer = $stmt->insert_id;
+        
+        $stmt->close();
     } else {
         // take customer id from login session
         $customer = $_SESSION['customer_id'];
@@ -43,44 +51,70 @@ if(isset($_POST['submit_checkout'])) {
     $date = $dt->format('Y-m-d');
 
     // create order record
-    $sql = "INSERT INTO orders (customer_id, email, date, status, street_1, street_2, city, state, zip_code, country)
-            VALUES ('".$customer."', '"
-            .$_POST['email']."', '"
-            .$date."', 
-            'Pending Payment', '"
-            .$_POST['street_1']."', '"
-            .$_POST['street_2']."', '"
-            .$_POST['city']."', '"
-            .$_POST['state']."', '"
-            .$_POST['zip_code']."', '"
-            .$_POST['country']."');";
-    
-    mysqli_query($conn, $sql);
-    
-    $order = mysqli_insert_id($conn);
+    $stmt = $conn->prepare(
+        "INSERT INTO orders (customer_id, email, date, status, street_1, street_2, city, state, zip_code, country)
+        VALUES (?, ?, ?, 'Pending Payment', ?, ?, ?, ?, ?, ?);"
+    );
+
+    $stmt->bind_param(
+        "issssssss"
+        , $customer
+        , $_POST['email']
+        , $date
+        , $_POST['street_1']
+        , $_POST['street_2']
+        , $_POST['city']
+        , $_POST['state']
+        , $_POST['zip_code']
+        , $_POST['country']
+    );
+
+    $stmt->execute();
+
+    $order = $stmt->insert_id;
+    $stmt->close();
 
     // variable for order total
     $total = 0;
 
     // create order_items record
     foreach($_SESSION['shopping_cart'] as $cartitem) {
-        $sql = "INSERT INTO order_items (order_id, batch_item_id, quantity, price)
-                VALUES ('".$order."', '"
-                .$cartitem['batch_item_id']."', '"
-                .$cartitem['quantity']."', '"
-                .$cartitem['price']."');";    
-        
-        mysqli_query($conn, $sql);
+        $stmt = $conn->prepare(
+            "INSERT INTO order_items (order_id, batch_item_id, quantity, price)
+            VALUES (?, ?, ?, ?);"
+        );
+
+        $stmt->bind_param(
+            "iiid"
+            , $order
+            , $cartitem['batch_item_id']
+            , $cartitem['quantity']
+            , $cartitem['price']
+        );
+
+        $stmt->execute();
+
+        $stmt->close();
 
         // add amount to total
         $total += $cartitem['quantity']*$cartitem['price'];
 
         // subtract available quantity
-        $sql = "UPDATE batch_items
-                SET quantity_sold = quantity_sold+".$cartitem['quantity']."
-                WHERE id = ".$cartitem['batch_item_id'].";";
-        
-        mysqli_query($conn, $sql);            
+        $stmt = $conn->prepare(
+            "UPDATE batch_items
+            SET quantity_sold = quantity_sold+?
+            WHERE id = ?;"
+        );
+
+        $stmt->bind_param(
+            "ii"
+            , $cartitem['quantity']
+            , $cartitem['batch_item_id']
+        );
+
+        $stmt->execute();
+
+        $stmt->close();           
     };
 }
 ?>
@@ -100,7 +134,7 @@ if(isset($_POST['submit_checkout'])) {
 
 
     <!-- JS script for pop-up forms -->
-    <script src="js/popup.js"></script>
+    <script src="js/main.js"></script>
 
     <title>Butterbean Bakery Order Confirmation</title>
 </head>

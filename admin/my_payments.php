@@ -22,34 +22,48 @@ include "admin_nav.php";
     //if the e-transfer form submit button is pressed
     if(isset($_POST['submit_payment'])) {
         // check order total
-        $sql = "
-            SELECT SUM(quantity*price)
+        $stmt = $conn->prepare(
+            "SELECT SUM(quantity*price) as total
             FROM order_items
-            WHERE order_id = ".$_POST['order'].";";
+            WHERE order_id = ?;"
+        );
 
-        $result = mysqli_query($conn, $sql);
-        $row = mysqli_fetch_row($result);
-        $order_amount = $row[0];
+        $stmt->bind_param("i", $_POST['order']);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($total);
+
+        while($stmt->fetch()){
+            $order_amount = $total;
+        };
+
+        $stmt->close();
 
         //if order total = e-transfer amount submitted
         if($order_amount == $_POST['amount']) {
             //create payment record 
-            $sql = "
-                INSERT INTO payments (order_id, sender_email, amount, date) 
-                VALUES ('".$_POST['order']."', '".$_POST['sender_email']."', '".$_POST['amount']."', NOW());";
-
-            mysqli_query($conn, $sql);
+            $stmt = $conn->prepare(
+                "INSERT INTO payments (order_id, sender_email, amount, date) 
+                VALUES (?, ?, ?, NOW());"
+            );
+            
+            $stmt->bind_param("isd", $_POST['order'], $_POST['sender_email'], $_POST['amount']);
+            $stmt->execute();
             
             //retrieve the payment id just created
-            $payment = mysqli_insert_id($conn);
+            $payment = $stmt->insert_id;
+
+            $stmt->close();
 
             // mark order as paid
-            $sql = "
-            UPDATE orders
-            SET status = 'Payment Received'
-            WHERE id = ".$_POST['order'].";";
+            $stmt = $conn->prepare(
+                "UPDATE orders
+                SET status = 'Payment Received'
+                WHERE id = ?;"
+            );
 
-            mysqli_query($conn, $sql);
+            $stmt->bind_param("i", $_POST['order']);
+            $stmt->execute();
 
             echo "<p>Payment Record ID: ".$payment." created. Order ID: ".$_POST['order']." marked as Payment Received </p>";
         } else {
