@@ -166,7 +166,7 @@
         <div class="col-6">
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" name="password" class="form-control" required>
+                <input type="password" name="password" class="form-control" minlength="8" required>
             </div>
         </div>
     </div>

@@ -1,8 +1,8 @@
 <?php
 //database account credentials
 $servername = "localhost";
-$dbusername = "hhattori";
-$dbpassword = "dZzsbUKaJGTFF4We";
+$dbusername = "dev";
+$dbpassword = "nno09VWFlZeSz1Uf";
 
 // Establish connection
 $conn = new mysqli($servername, $dbusername, $dbpassword);
@@ -15,5 +15,5 @@ $conn = new mysqli($servername, $dbusername, $dbpassword);
 //   echo "<div class='alert alert-success' role='alert'>MySQL: Connected successfully </div>";
 
 // Use bus465 database
-mysqli_select_db($conn, "G5_OrderManagementSystem");
+mysqli_select_db($conn, "bus465");
 ?>
