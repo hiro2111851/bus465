@@ -17,6 +17,9 @@ include "../external/db_connect.php";
 
 // handles adding batch item to batch
 include "../external/add_batch_item.php";
+
+//adds a navbar
+include "admin_nav.php";
 ?>
 
 <!DOCTYPE html>
