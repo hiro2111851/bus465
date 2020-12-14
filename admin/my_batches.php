@@ -14,8 +14,8 @@ include "./admin_check.php";
 //handles database connection
 include "../external/db_connect.php";
 
-//handles batch creation
-include "../external/add_batch.php";
+//form handler
+include "../external/form_handler.php";
 
 //adds a navbar
 include "admin_nav.php";

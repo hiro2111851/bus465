@@ -14,11 +14,8 @@ include "./admin_check.php";
 //handles database connection
 include "../external/db_connect.php";
 
-//handles adding product and product image upload
-include "../external/add_product.php";
-
-//handles removing products
-include "../external/remove_product.php";
+//form handler
+include "../external/form_handler.php";
 
 //adds a navbar
 include "admin_nav.php";
