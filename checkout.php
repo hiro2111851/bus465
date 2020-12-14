@@ -11,17 +11,8 @@ session_start();
 //handles database connection
 include "external/db_connect.php";
 
-//handles add-to-cart
-include "external/add_to_cart.php";
-
-// check account creation form submission
-include "external/create_account.php";
-
-// check login form submission
-include "external/login.php";
-
-// check logout button
-include "external/logout.php";
+//form handler
+include "external/form_handler.php";
 ?>
 
 <!doctype html>

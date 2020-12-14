@@ -15,11 +15,11 @@ $batch_id = $_GET['batch_id'];
 //handles database connection
 include "../external/db_connect.php";
 
-// handles adding batch item to batch
-include "../external/add_batch_item.php";
+//form handler
+include "../external/form_handler.php";
 
 //adds a navbar
-include "admin_nav.php";
+include "admin_nav.php"
 ?>
 
 <!DOCTYPE html>

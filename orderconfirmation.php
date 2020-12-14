@@ -8,115 +8,11 @@
 <?php
 session_start();
 
+//handles database connection
 include "external/db_connect.php";
 
-// If checkout form submitted
-if(isset($_POST['submit_checkout'])) {
-    //check if guest checkout
-    if($_POST['guest'] == 1) {
-        //create guest customer record
-        $stmt = $conn->prepare(
-            "INSERT INTO customers (guest, email, first_name, last_name, phone, street_1, street_2, city, state, zip_code, country)
-            VALUES ('1', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
-        );
-
-        $stmt->bind_param(
-            "ssssssssss"
-            ,$_POST['email']
-            ,$_POST['first_name']
-            ,$_POST['last_name']
-            ,$_POST['phone']
-            ,$_POST['street_1']
-            ,$_POST['street_2']
-            ,$_POST['city']
-            ,$_POST['state']
-            ,$_POST['zip_code']
-            ,$_POST['country']
-        );
-
-        $stmt->execute();
-
-        $customer = $stmt->insert_id;
-        
-        $stmt->close();
-    } else {
-        // take customer id from login session
-        $customer = $_SESSION['customer_id'];
-    }
-    // retrieve current date
-    $tz = "America/Vancouver";
-    $timestamp = time();
-    $dt = new DateTime("now", new DateTimeZone($tz));
-    $dt->setTimestamp($timestamp);
-    $date = $dt->format('Y-m-d');
-
-    // create order record
-    $stmt = $conn->prepare(
-        "INSERT INTO orders (customer_id, email, date, status, street_1, street_2, city, state, zip_code, country)
-        VALUES (?, ?, ?, 'Pending Payment', ?, ?, ?, ?, ?, ?);"
-    );
-
-    $stmt->bind_param(
-        "issssssss"
-        , $customer
-        , $_POST['email']
-        , $date
-        , $_POST['street_1']
-        , $_POST['street_2']
-        , $_POST['city']
-        , $_POST['state']
-        , $_POST['zip_code']
-        , $_POST['country']
-    );
-
-    $stmt->execute();
-
-    $order = $stmt->insert_id;
-    $stmt->close();
-
-    // variable for order total
-    $total = 0;
-
-    // create order_items record
-    foreach($_SESSION['shopping_cart'] as $cartitem) {
-        $stmt = $conn->prepare(
-            "INSERT INTO order_items (order_id, batch_item_id, quantity, price)
-            VALUES (?, ?, ?, ?);"
-        );
-
-        $stmt->bind_param(
-            "iiid"
-            , $order
-            , $cartitem['batch_item_id']
-            , $cartitem['quantity']
-            , $cartitem['price']
-        );
-
-        $stmt->execute();
-
-        $stmt->close();
-
-        // add amount to total
-        $total += $cartitem['quantity']*$cartitem['price'];
-
-        // subtract available quantity
-        $stmt = $conn->prepare(
-            "UPDATE batch_items
-            SET quantity_sold = quantity_sold+?
-            WHERE id = ?;"
-        );
-
-        $stmt->bind_param(
-            "ii"
-            , $cartitem['quantity']
-            , $cartitem['batch_item_id']
-        );
-
-        $stmt->execute();
-
-        $stmt->close();           
-    };
-}
+//form handler
+include "external/form_handler.php";
 ?>
 
 <!DOCTYPE html>
